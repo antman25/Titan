@@ -1,8 +1,0 @@
-prefix=/home/antman/catkin_ws/src/titan_ws/install
-
-Name: titan_description
-Description: Description of titan_description
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/antman/catkin_ws/src/titan_ws/install/lib 
-Requires: 

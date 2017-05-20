@@ -1,8 +1,0 @@
-prefix=/home/antman/catkin_ws/src/titan_ws/devel
-
-Name: titan_base
-Description: Description of titan_base
-Version: 0.0.0
-Cflags: -I/home/antman/catkin_ws/src/titan_ws/src/titan_base/include/titan_base
-Libs: -L/home/antman/catkin_ws/src/titan_ws/devel/lib 
-Requires: roscpp control_toolbox
