@@ -116,6 +116,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 	include
+	${Boost_INCLUDE_DIRS}
 	${catkin_INCLUDE_DIRS}
 )
 
@@ -141,6 +142,7 @@ add_executable(titan_base_node  src/titan_base_node.cpp
 ## Specify libraries to link a library or executable target against
  target_link_libraries(titan_base_node
    ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
  )
 
 #############
