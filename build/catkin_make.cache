@@ -1,0 +1,2 @@
+titan_base:titan_control:titan_description:titan_gazebo:titan_navigation
+-DCATKIN_DEVEL_PREFIX=/home/antman/catkin_ws/src/titan_ws/devel -DCMAKE_INSTALL_PREFIX=/home/antman/catkin_ws/src/titan_ws/install -G Unix Makefiles

@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/antman/catkin_ws/src/titan_ws/devel/setup.sh
