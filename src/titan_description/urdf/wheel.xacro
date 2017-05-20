@@ -1,0 +1,56 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="titan_wheel">
+
+	<xacro:macro name="titan_wheel" params="wheel_prefix *joint_pose">
+		<link name="${wheel_prefix}_wheel_link">
+			<inertial>
+				<mass value="5" />
+				<!-- <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" /> -->
+				<xacro:cylinder_inertia m="1" r="${wheel_radius}" h="${wheel_length}" />
+
+			</inertial>
+			<visual>
+				<origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+				<geometry>
+					<!-- <mesh filename="package://titan_description/meshes/Wheel.dae" scale="0.001 0.001 0.001"/> -->
+					<cylinder length="${wheel_length}" radius="${wheel_radius}" />
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+				<geometry>
+					<cylinder length="${wheel_length}" radius="${wheel_radius}" />
+				</geometry>
+			</collision>
+		</link>
+
+		<gazebo reference="${wheel_prefix}_wheel_link">
+			<mu1 value="10000.0" />
+			<mu2 value="10000.0" />
+			<kp value="100000.0" />
+			<kd value="0.00001" />
+			<maxVel value="1.0" />
+			<minDepth value="0.0001" />
+			<fdir1 value="0 1 0"/>
+		</gazebo>
+
+		<joint name="${wheel_prefix}_wheel" type="continuous">
+			<parent link="base_link"/>
+			<child link="${wheel_prefix}_wheel_link"/>
+			<xacro:insert_block name="joint_pose"/>
+			<axis xyz="0 1 0" rpy="0 0 0" />
+			<limit effort="10000" velocity="1000"/>
+			<joint_properties damping="0.0" friction="0.0"/>
+		</joint>
+
+		<transmission name="${wheel_prefix}_wheel_trans" type="SimpleTransmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<actuator name="${wheel_prefix}_wheel_motor">
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+			<joint name="${wheel_prefix}_wheel">
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+			</joint>
+		</transmission>
+
+	</xacro:macro>
+</robot>

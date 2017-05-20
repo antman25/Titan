@@ -1,0 +1,57 @@
+<visual name='base_front'>
+			<origin xyz="${(plate_x / 2)} 0 ${plate_offset}" rpy="${rotate90CCW} 0 ${rotate90CCW}"/>
+			<geometry>
+				<mesh filename="package://titan_description/meshes/9x12-plate.dae" scale="0.001 0.001 0.001"/>
+			</geometry>
+			<material name="silver"/>
+		</visual>
+
+		<visual name='base_rear'>
+			<origin xyz="${-(plate_x / 2)} 0 ${plate_offset}" rpy="${rotate90CCW} 0 ${rotate90CCW}"/>
+			<geometry>
+				<mesh filename="package://titan_description/meshes/9x12-plate.dae" scale="0.001 0.001 0.001"/>
+			</geometry>
+			<material name="red"/>
+		</visual>
+
+		<visual name='left_channel'>
+			<origin xyz="${-long_channel_x/2} ${(plate_y/2) - long_channel_y} ${plate_offset + plate_z}" rpy="${rotate90CCW} 0 ${rotate90CCW}"/>
+			<geometry>
+				<mesh filename="package://titan_description/meshes/18in_channel.dae" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+
+		<visual name='right_channel'>
+			<origin xyz="${-long_channel_x/2} ${-plate_y/2} ${plate_offset + plate_z}" rpy="${rotate90CCW} 0 ${rotate90CCW}"/>
+			<geometry>
+				<mesh filename="package://titan_description/meshes/18in_channel.dae" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+
+		<visual name='front_channel'>
+			<origin xyz="${(long_channel_x/2) - short_channel_y} ${(plate_y/2) - short_channel_y} ${plate_offset + plate_z}" rpy="${rotate90CCW} 0 0"/>
+			<geometry>
+				<mesh filename="package://titan_description/meshes/9in_channel.dae" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+
+		<visual name='rear_channel'>
+			<origin xyz="${-(long_channel_x/2) } ${(plate_y/2) - short_channel_y} ${plate_offset + plate_z}" rpy="${rotate90CCW} 0 0"/>
+			<geometry>
+				<mesh filename="package://titan_description/meshes/9in_channel.dae" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+
+		<visual name='top_front'>
+			<origin xyz="${(plate_x / 2)} 0 ${plate_offset + base_z_size}" rpy="${rotate90CCW} 0 ${rotate90CCW}"/>
+			<geometry>
+				<mesh filename="package://titan_description/meshes/9x12-plate.dae" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+
+		<visual name='top_rear'>
+			<origin xyz="${-(plate_x / 2)} 0 ${plate_offset + base_z_size}" rpy="${rotate90CCW} 0 ${rotate90CCW}"/>
+			<geometry>
+				<mesh filename="package://titan_description/meshes/9x12-plate.dae" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>

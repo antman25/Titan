@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find titan_description)/urdf/titan.xacro'"/>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find titan_control)/config/titan_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"    output="screen" args="titan_joint_state_controller titan_velocity_controller --shutdown-timeout 3">
+    <remap from="/titan_velocity_controller/cmd_vel" to="/cmd_vel" />
+    <remap from="/titan_velocity_controller/odom" to="/odom" />
+  </node>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find titan_description)/urdf/titan.xacro'"/>
+    <remap from="/joint_states" to="/joint_states" />
+  </node>
+</launch>
+
+
+
+
