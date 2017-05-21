@@ -9,11 +9,10 @@ find_package(catkin REQUIRED COMPONENTS
 	roslaunch
 	controller_manager
 	hardware_interface
-	std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+ find_package(Boost REQUIRED COMPONENTS system chrono)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -104,7 +103,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include/titan_base
 #  LIBRARIES mybot_base
-  CATKIN_DEPENDS roscpp control_toolbox
+  CATKIN_DEPENDS roscpp control_toolbox hardware_interface std_msgs
 #  DEPENDS system_lib
 )
 
