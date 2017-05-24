@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 
-
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find titan_description)/urdf/titan.xacro'"/>
-
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find titan_control)/config/titan_control.yaml" command="load"/>
 
@@ -15,7 +12,7 @@
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find titan_description)/urdf/titan.xacro'"/>
+    <param name="robot_description" command="$(find xacro)/xacro '$(find titan_description)/urdf/titan.xacro' --inorder"/>
     <remap from="/joint_states" to="/joint_states" />
   </node>
 </launch>

@@ -131,7 +131,7 @@ long titan_hardware::getTicksPerRev()
 void titan_hardware::updateMotorData(int motor, long encoderVal)
 {
 	ros::Time currentTime=ros::Time::now();
-	ROS_INFO("Updated Motor: %i - Data: %i", motor, (int)encoderVal);
+	//ROS_INFO("Updated Motor: %i - Data: %i", motor, (int)encoderVal);
 	if (initEncoder[motor] == false)
 	{
 		initEncoder[motor] = true;

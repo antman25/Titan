@@ -1,0 +1,7 @@
+<launch>
+
+  <arg name="robot_namespace" default="/"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find titan_description)/urdf/titan.xacro' --inorder"/>
+
+</launch>
