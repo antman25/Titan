@@ -129,7 +129,7 @@
 	<joint name="base_to_laserbox" type="fixed">
 		<parent link="base_link"/>
 		<child link="laserbox_link"/>
-		<origin xyz="0.16 0 ${(base_z_size/2) + plate_offset + laser_z_size}"/>
+		<origin xyz="0.16 0 ${(base_z_size/2) + plate_offset + laser_z_size}" rpy="0 0 3.14" />
 	</joint>
 
 	<joint name="laserbox_to_laser" type="fixed">
