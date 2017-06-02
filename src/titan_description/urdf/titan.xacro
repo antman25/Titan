@@ -32,8 +32,8 @@
 	<xacro:property name="short_channel_y" value="0.0381"/>
 	<xacro:property name="short_channel_mass" value="0.0952544"/>
 
-	<xacro:property name="wheelbase" value="0.2" />
-	<xacro:property name="track" value="0.345" />
+	<xacro:property name="wheelbase" value="0.23" />
+	<xacro:property name="track" value="0.355" />
 	<!-- <xacro:property name="wheelbase" value="1.0" />
 	<xacro:property name="track" value="1.0" /> --> 
 	<xacro:property name="wheel_vertical_offset" value="0.06" />
@@ -141,7 +141,7 @@
 	<joint name="base_to_imu_link" type="fixed">
 		<parent link="base_link"/>
 		<child link="imu_link"/>
-		<origin xyz="0.16 0 ${(base_z_size/2) + plate_offset + 0.02}"/>
+		<origin xyz="0.16 0 ${(base_z_size/2) + plate_offset + 0.02}" rpy="0 0 ${3.14}"/>
 	</joint>
 
 	

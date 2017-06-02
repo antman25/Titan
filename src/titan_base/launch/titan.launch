@@ -12,10 +12,6 @@
  <param name="robot_description" command="$(find xacro)/xacro '$(find titan_description)/urdf/titan.xacro' --inorder"/>
 
 
- <!-- <node pkg="tf" type="static_transform_publisher" name="base_laser" args="0 0 0 0 0 0 base_link laser_link 100"/> -->
- <!-- <node pkg="tf" type="static_transform_publisher" name="base_imu" args=  "0 0 0 0 0 0 base_link imu_link 100"/> -->
-
-
   <include file="$(find titan_control)/launch/titan_control.launch" />	
 
   <!-- load the controllers -->
@@ -23,17 +19,6 @@
   <node name="titan_base_node" pkg="titan_base" type="titan_base_node" respawn="false" output="screen"/>
 
   
-
-  <node pkg="imu_complementary_filter" type="complementary_filter_node"
-      name="complementary_filter_gain_node" output="screen">
-    <param name="do_bias_estimation" value="true"/>
-    <param name="do_adaptive_gain" value="true"/>
-    <param name="use_mag" value="true"/>
-    <param name="gain_acc" value="0.01"/>
-    <param name="gain_mag" value="0.01"/>
-   
-  </node>
-
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
     <rosparam command="load" file="$(find titan_navigation)/config/ekf_localization.yaml" />
     <remap from="odometry/filtered" to="odom"/>
