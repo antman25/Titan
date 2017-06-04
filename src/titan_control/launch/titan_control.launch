@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<launch>
+	<launch>
+  		<include file="$(find titan_description)/launch/description.launch" >
+	</include>
 
-  <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find titan_control)/config/titan_control.yaml" command="load"/>
 
-  <!-- load the controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"    output="screen" args="titan_joint_state_controller titan_velocity_controller --shutdown-timeout 3">
-    <remap from="/titan_velocity_controller/cmd_vel" to="/cmd_vel" />
-    <remap from="/titan_velocity_controller/odom" to="/odom" />
-  </node>
+	<!-- Load joint controller configurations from YAML file to parameter server -->
+	<rosparam file="$(find titan_control)/config/titan_control.yaml" command="load"/>
 
-  <!-- convert joint states to TF transforms for rviz, etc -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
-    <param name="robot_description" command="$(find xacro)/xacro '$(find titan_description)/urdf/titan.xacro' --inorder"/>
-    <remap from="/joint_states" to="/joint_states" />
-  </node>
+	<!-- load the controllers -->
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"    output="screen" args="titan_joint_state_controller titan_velocity_controller --shutdown-timeout 3">
+		<!-- <remap from="/titan_velocity_controller/cmd_vel" to="/cmd_vel" /> -->
+		<remap from="titan_velocity_controller/odom" to="/odom" />
+	</node>
+
+	<node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
+		<rosparam command="load" file="$(find titan_control)/config/localization.yaml" />
+	</node>
+
+
+	<node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server" output="screen"/>
+
+
+	<!-- convert joint states to TF transforms for rviz, etc -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+		<param name="robot_description" command="$(find xacro)/xacro '$(find titan_description)/urdf/titan.xacro' --inorder"/>
+		<remap from="/joint_states" to="/joint_states" />
+	</node>
+
+	<node pkg="twist_mux" type="twist_mux" name="twist_mux">
+		<rosparam command="load" file="$(find titan_control)/config/twist_mux.yaml" />
+		<remap from="cmd_vel_out" to="titan_velocity_controller/cmd_vel"/>
+	</node>
+
 </launch>
 
 
