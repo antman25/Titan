@@ -1,3 +1,0 @@
-<launch>
-<node pkg="tf" type="static_transform_publisher" name="base_laser" args="0 0 0 0 0 0 base_link laser_link 100"/>
-</launch>
