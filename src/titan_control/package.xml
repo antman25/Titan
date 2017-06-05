@@ -40,6 +40,9 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>twist_mux</run_depend>
+  <run_depend>interactive_marker_twist_server</run_depend>
+
 
 
   <!-- The export tag contains other, unspecified, tags -->
