@@ -8,13 +8,8 @@ transform_tolerance: 0.5
 
 resolution: 0.05
 
-<<<<<<< HEAD
-obstacle_range: 5.5
-raytrace_range: 4.0
-=======
 obstacle_range: 3.5
 raytrace_range: 4.5
->>>>>>> 285cd4d57ca5b128fe6cc63204a23cad7f24cbb5
 
 #layer definitions
 static:
