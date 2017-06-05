@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+	<include file="$(find titan_description)/launch/description.launch" />
+
+
 	<launch>
   		<include file="$(find titan_description)/launch/description.launch" >
 	</include>
