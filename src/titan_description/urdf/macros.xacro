@@ -15,4 +15,41 @@
 	<xacro:macro name="cylinder_inertia" params="m r h">
 		<inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0" iyy="${m*(3*r*r+h*h)/12}" iyz = "0" izz="${m*r*r/2}"/>
 	</xacro:macro>
+
+	<xacro:macro name="make_box" params="x y z roll pitch yaw sizex sizey sizez">
+		
+		<collision name='collision'>
+			<origin xyz="${x} ${y} ${z}" rpy="${roll} ${pitch} ${yaw}"/>
+			<geometry>
+				<box size="${sizex} ${sizey} ${sizez}"/>
+			</geometry>
+		</collision>
+
+		<visual name='visual'>
+			<origin xyz="${x} ${y} ${z}" rpy="${roll} ${pitch} ${yaw}"/>
+			<geometry>
+				<box size="${sizex} ${sizey} ${sizez}"/>
+			</geometry>
+			<material name="white"/>
+		</visual>
+	</xacro:macro>
+
+        <!-- <xacro:macro name="make_cylinder" params="x y z roll pitch yaw r h">
+		
+		<collision name='collision'>
+			<origin xyz="${x} ${y} ${z}" rpy="${roll} ${pitch} ${yaw}"/>
+			<geometry>
+				 <cylinder length="${r}" length="${h}"/>
+			</geometry>
+		</collision>
+
+		<visual name='visual'>
+			<origin xyz="${x} ${y} ${z}" rpy="${roll} ${pitch} ${yaw}"/>
+			<geometry>
+				<cylinder length="${r}" length="${h}"/>
+			</geometry>
+			<material name="white"/>
+		</visual>
+        </xacro:macro> -->
+
 </robot>

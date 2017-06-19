@@ -1,0 +1,6 @@
+controller_list:
+  - name: fake_Arm_controller
+    joints:
+      - base_to_zaxis
+      - link1_to_link2
+      - link2_to_link3
