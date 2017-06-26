@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<launch>
+
+	<!-- Load joint controller configurations from YAML file to parameter server -->
+	<rosparam file="$(find titan_control)/config/titan_arm_control.yaml" command="load"/>
+
+	<!-- load the controllers -->
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"    output="screen" args="titan_joint_state_controller titan_arm_controller2 --shutdown-timeout 3">
+		<!-- <remap from="/titan_velocity_controller/cmd_vel" to="/cmd_vel" /> -->
+	</node>
+
+</launch>
+
+
+
+
