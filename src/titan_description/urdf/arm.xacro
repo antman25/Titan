@@ -110,7 +110,7 @@
 	<joint name="link3_to_eef" type="fixed">
 		<parent link="link3"/>
 		<child link="end_effector"/>
-                <origin xyz="${link3_base_x_size} 0 ${-eef_z_size/2}" rpy="0 0 0"/>
+                <origin xyz="${link3_base_x_size} 0 ${-eef_z_size + 0.001}" rpy="0 0 0"/>
 	</joint>
 </robot>
 

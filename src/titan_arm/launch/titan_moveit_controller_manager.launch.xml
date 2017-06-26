@@ -1,3 +1,9 @@
 <launch>
+	
+  <!-- Set the param that trajectory_execution_manager needs to find the controller plugin -->
 
+	<param name="moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
+        <param name="controller_manager_name" value="/"/>
+        <param name="use_controller_manager" value="true"/>
+        <rosparam file="$(find titan_arm)/config/controllers.yaml"/> 
 </launch>
