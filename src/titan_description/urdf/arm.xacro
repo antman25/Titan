@@ -94,7 +94,7 @@
 	<joint name="link1_to_link2" type="revolute">
 		<parent link="link1"/> 
 		<child link="link2"/>
-		<limit effort="1000.0" lower="-2" upper="2" velocity="0.5"/>
+		<limit effort="1000.0" lower="-2" upper="2" velocity="0.45"/>
 		<axis xyz="0 0 1"/>
 		<origin xyz="${link1_base_z_size/2} 0 ${-link1_base_z_size}" rpy="0 0 0" />
 	</joint>
@@ -102,13 +102,15 @@
 	<joint name="link2_to_link3" type="revolute">
 		<parent link="link2"/> 
 		<child link="link3"/>
-		<limit effort="1000.0" lower="-3.0" upper="3.0" velocity="0.5"/>
+		<limit effort="1000.0" lower="-3.0" upper="3.0" velocity="0.255"/>
 		<axis xyz="0 0 1"/>
 		<origin xyz="${link2_base_x_size} 0 ${-link2_base_z_size}" rpy="0 0 0" />
 	</joint>
 
-	<joint name="link3_to_eef" type="fixed">
+	<joint name="link3_to_eef" type="revolute">
 		<parent link="link3"/>
+		<limit effort="1000.0" lower="${-1.57}" upper="1.57" velocity="0.35"/>
+		<axis xyz="0 0 1"/>
 		<child link="end_effector"/>
                 <origin xyz="${link3_base_x_size} 0 ${-eef_z_size + 0.001}" rpy="0 0 0"/>
 	</joint>

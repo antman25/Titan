@@ -6,4 +6,4 @@ controller_list:
       - link2_to_link3
   - name: fake_EEF_Group_controller
     joints:
-      []
+      - link3_to_eef
