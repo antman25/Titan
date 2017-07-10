@@ -39,7 +39,7 @@
   <include file="$(find titan_navigation)/launch/amcl.launch" />
 
   <!-- Move base -->
-   <include file="$(find titan_navigation)/launch/move_base.launch">
+  <include file="$(find titan_navigation)/launch/move_base.launch">
    <remap from="cmd_vel" to="/titan_velocity_controller/cmd_vel"/>
 
   </include>
