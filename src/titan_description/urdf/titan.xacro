@@ -117,17 +117,34 @@
 		</visual>
 	</link>
 
+	<link name="camera_link">
+                <visual name='camera_box'>
+                        <origin xyz="0 0 0" rpy="0 0 0"/>
+                        <geometry>
+                                <box size="0.05 0.05 0.05"/>
+                        </geometry>
+                        <material name="green"/>
+                </visual>
+        </link>
+
+
 	<joint name="base_to_inertia" type="fixed">
 		<parent link="base_link"/>
 		<child link="inertia_link"/>
 		<origin xyz="0 0 0"/>
 	</joint>
 
+	<joint name="base_to_camera" type="fixed">
+                <parent link="base_link"/>   
+                <child link="camera_link"/> 
+                <origin xyz="0.2 0 ${(base_z_size/2) + plate_offset + 0.05}" rpy="0 0 0" />
+        </joint>
+
 
 	<joint name="base_to_laserbox" type="fixed">
 		<parent link="base_link"/>
 		<child link="laserbox_link"/>
-		<origin xyz="0.16 0 ${(base_z_size/2) + plate_offset + laser_z_size}" rpy="0 0 3.14" />
+		<origin xyz="0.025 0.08 ${(base_z_size/2) + plate_offset + laser_z_size}" rpy="0 0 0" />
 	</joint>
 
 	<joint name="laserbox_to_laser" type="fixed">
@@ -139,7 +156,7 @@
 	<joint name="base_to_imu_link" type="fixed">
 		<parent link="base_link"/>
 		<child link="imu_link"/>
-		<origin xyz="0.16 0 ${(base_z_size/2) + plate_offset + 0.02}" rpy="0 0 ${3.14}"/>
+		<origin xyz="-0.050 -0.010 ${(base_z_size/2) + plate_offset + 0.02}" rpy="0 0 ${0}"/>
 	</joint>
 
 	
