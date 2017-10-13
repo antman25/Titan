@@ -4,7 +4,17 @@ project(titan_control)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+#find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  controller_manager
+  roscpp
+  roslaunch
+  std_msgs
+  actionlib_msgs
+  actionlib
+)
+
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -66,6 +76,13 @@ find_package(catkin REQUIRED)
 #   std_msgs  # Or other packages containing msgs
 # )
 
+#generate_messages(
+#   DEPENDENCIES
+#   std_msgs  # Or other packages containing msgs
+#   actionlib_msgs
+# )
+
+
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
 ################################################
@@ -108,7 +125,9 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
+ include_directories(include
+  ${catkin_INCLUDE_DIRS}
+)
 
 ## Declare a C++ library
 # add_library(mybot_control
@@ -121,7 +140,8 @@ catkin_package(
 # add_dependencies(mybot_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(mybot_control_node src/mybot_control_node.cpp)
+ add_executable(titan_nav_node src/titan_nav_node.cpp)
+
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -131,6 +151,10 @@ catkin_package(
 # target_link_libraries(mybot_control_node
 #   ${catkin_LIBRARIES}
 # )
+
+target_link_libraries(titan_nav_node
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##
