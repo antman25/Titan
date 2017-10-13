@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   roslaunch
   std_msgs
+  geometry_msgs
   actionlib_msgs
   actionlib
 )
