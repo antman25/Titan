@@ -1,0 +1,56 @@
+<launch>
+	<node pkg="rosbag" type="record" name="robot_bag"
+		args="-o /mnt/sdcard/bag/titan.bag 
+		/amcl_pose
+		/camera/image_raw/compressed
+		/cmd_vel
+		/current_front_left
+		/current_front_right
+		/current_rear_left
+		/current_rear_right
+		/debug
+		/diagnostics
+		/encoder_fl_wheel
+		/encoder_fr_wheel
+		/encoder_rl_wheel
+		/encoder_rr_wheel
+		/imu/data
+		/imu/mag
+		/imu/raw
+		/initialpose
+		/joint_states
+		/joy_teleop/cmd_vel
+		/map
+		/map_metadata
+		/map_updates
+		/move_base/DWAPlannerROS/global_plan
+		/move_base/DWAPlannerROS/local_plan
+		/move_base/NavfnROS/plan
+		/move_base/current_goal
+		/move_base/feedback
+		/move_base/global_costmap/costmap
+		/move_base/global_costmap/footprint
+		/move_base/goal
+		/move_base/local_costmap/costmap
+		/move_base/local_costmap/footprint
+		/move_base/result
+		/move_base/status
+		/move_base_simple/goal
+		/odom
+		/particlecloud
+		/rpms
+		/scan
+		/tf
+		/tf_static
+		/titan_velocity_controller/cmd_vel
+		/titan_velocity_controller/odom
+		/vel_sp_fl_wheel
+		/vel_sp_fr_wheel
+		/vel_sp_rl_wheel
+		/vel_sp_rr_wheel
+		/voltage_front_logic
+		/voltage_front_main
+		/voltage_rear_logic
+		/voltage_rear_main
+		"/>
+</launch>
