@@ -16,12 +16,33 @@ int main(int argc, char **argv)
 	ros::Publisher initialpose_pub = nh.advertise<geometry_msgs::PoseWithCovarianceStamped>("/initialpose", 1000);
 	geometry_msgs::PoseWithCovarianceStamped poseStart;
 
-	ros::Publisher chatter_pub = nh.advertise<std_msgs::String>("test", 1000);
-	std_msgs::String msg;		
-	msg.data = "test";
-	chatter_pub.publish(msg);
+	//ros::Publisher chatter_pub = nh.advertise<std_msgs::String>("test", 1000);
+	//std_msgs::String msg;
+	//msg.data = "bae";
 
-	ros::ServiceClient client = nh.serviceClient<std_srvs::Empty>("/move_base/clear_costmap");
+	ros::Rate loop_rate(1);
+
+	/*while (ros::ok())
+	{
+		ROS_INFO("OK!");
+		chatter_pub.publish(msg);
+		ros::spinOnce();
+		loop_rate.sleep();
+		
+	}*/
+
+	while (1)
+	{
+		int n = initialpose_pub.getNumSubscribers();
+		ROS_INFO("Num subs: %i\n", n);
+		if (n > 0)
+			break;
+		ros::spinOnce();
+		loop_rate.sleep();
+	}
+
+
+	ros::ServiceClient client = nh.serviceClient<std_srvs::Empty>("/move_base/clear_costmaps");
 	std_srvs::Empty srvClearCostMap;
 
 	char frame_id[] = "map";
@@ -33,7 +54,7 @@ int main(int argc, char **argv)
 	poseStart.pose.covariance[7] = 0.25;
 	poseStart.pose.covariance[35] = 0.1;
 
-	poseStart.pose.pose.position.x = 0.0;
+	poseStart.pose.pose.position.x = 0.5;
 	poseStart.pose.pose.position.y = 0.0;
 	poseStart.pose.pose.position.z = 0.0;
 
@@ -50,7 +71,7 @@ int main(int argc, char **argv)
 
 
 
-	/*MoveBaseClient ac("move_base", true);
+	MoveBaseClient ac("move_base", true);
         while (!ac.waitForServer(ros::Duration(5.0)))
         {
                 ROS_INFO("Waiting for movebase server");
@@ -64,22 +85,35 @@ int main(int argc, char **argv)
 	{
 		ROS_ERROR("Failed to call service /move_base/clear_costmap");
 		return 1;
-	}*/
+	}
 
 	
 
 	move_base_msgs::MoveBaseGoal goal;
 
-        /*goal.target_pose.header.frame_id = "base_link";
+        goal.target_pose.header.frame_id = "map";
         goal.target_pose.header.stamp = ros::Time::now();
 
-        goal.target_pose.pose.position.x = 0;
+        goal.target_pose.pose.position.x = 2.5;
         goal.target_pose.pose.position.y =  0;
         goal.target_pose.pose.orientation.z = 0;
         goal.target_pose.pose.orientation.w = 1;
 
         ac.sendGoal(goal);
-        ac.waitForResult();*/
+        ac.waitForResult();
+	ROS_INFO("GOAL 1 reached");
+
+
+	goal.target_pose.pose.position.x = 5.0;
+        goal.target_pose.pose.position.y =  0;
+        goal.target_pose.pose.orientation.z = 0;
+        goal.target_pose.pose.orientation.w = 1;
+
+        ac.sendGoal(goal);
+        ac.waitForResult();  
+
+	ROS_INFO("Goal 2 reached");
+
 
 	return 0;
 }
