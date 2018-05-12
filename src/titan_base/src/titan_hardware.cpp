@@ -60,7 +60,7 @@ void titan_hardware::registerControlInterfaces()
 	registerInterface(&jnt_vel_interface);
 
 
-	ros::V_string arm_joint_names = boost::assign::list_of("link1_to_link2")("link2_to_link3");
+	/*ros::V_string arm_joint_names = boost::assign::list_of("link1_to_link2")("link2_to_link3");
 	for (unsigned int i = 0; i < arm_joint_names.size(); i++)
 	{
 		hardware_interface::JointStateHandle joint_state_handle(arm_joint_names[i], &pos[i], &vel[i], &eff[i]);
@@ -70,7 +70,7 @@ void titan_hardware::registerControlInterfaces()
 		jnt_vel_interface.registerHandle(joint_handle);
 	}
 	registerInterface(&jnt_state_interface);
-	registerInterface(&jnt_vel_interface);
+	registerInterface(&jnt_vel_interface);*/
 
 	
 }
