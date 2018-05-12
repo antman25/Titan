@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_base">
+      <!-- Parameters used to find the camera -->
+      <param name="publish_debug_topics" value="true"/>
+    </node>
+</launch>
