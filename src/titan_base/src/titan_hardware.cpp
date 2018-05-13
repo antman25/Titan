@@ -41,7 +41,7 @@ titan_hardware::titan_hardware(ros::NodeHandle n, ros::NodeHandle p)
 	pubRearLeftSetpoint = nh.advertise<std_msgs::Int64>("vel_sp_rl_wheel", 10);
 	pubRearRightSetpoint = nh.advertise<std_msgs::Int64>("vel_sp_rr_wheel", 10);
 
-	setWheelDiameter(0.1016);
+	setWheelDiameter(0.1524);
 	setTicksPerRev(1296);
 }
 
