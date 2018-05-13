@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<param name="robot_description" command="$(find xacro)/xacro '$(find titan_description)/urdf/titan.xacro' --inorder"/>
-	<include file="$(find titan_base)/launch/serial.launch" />
-	<include file="$(find titan_base)/launch/laser.launch" />
         <include file="$(find titan_base)/launch/r200_nodelet_rgbd.launch" />
+	<include file="$(find titan_base)/launch/serial.launch" />
+	<include file="$(find titan_base)/launch/hardware.launch" />
+	<include file="$(find titan_base)/launch/imu.launch" />
+	<include file="$(find titan_base)/launch/laser.launch" />
 	<include file="$(find titan_control)/launch/titan_control.launch" />
-	
- 
-	<node name="titan_base_node" pkg="titan_base" type="titan_base_node" respawn="false" output="screen"/>
-  
-	<node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
-		<rosparam command="load" file="$(find titan_control)/config/localization.yaml" />
-		<remap from="odometry/filtered" to="odom"/>
-	</node>
-
-
-
-
-
 </launch>
 
 

@@ -107,7 +107,7 @@
 		</visual>
 	</link>
 
-	<link name="imu_link">	
+	<!-- <link name="imu_link">	
 		<visual name='imu_box'>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<geometry>
@@ -115,7 +115,7 @@
 			</geometry>
 			<material name="green"/>
 		</visual>
-	</link>
+	</link> -->
 
 	<link name="camera_link">
                 <visual name='camera_box'>
@@ -137,14 +137,15 @@
 	<joint name="base_to_camera" type="fixed">
                 <parent link="base_link"/>   
                 <child link="camera_link"/> 
-                <origin xyz="0.2 0 ${(base_z_size/2) + plate_offset + 0.05}" rpy="0 0 0" />
+                <origin xyz="0.0 0 ${(base_z_size/2) + plate_offset + 0.3}" rpy="0 0 0" />
         </joint>
 
 
 	<joint name="base_to_laserbox" type="fixed">
 		<parent link="base_link"/>
 		<child link="laserbox_link"/>
-		<origin xyz="0.025 0.08 ${(base_z_size/2) + plate_offset + laser_z_size}" rpy="0 0 0" />
+		<!-- <origin xyz="0.025 0.08 ${(base_z_size/2) + plate_offset + laser_z_size}" rpy="0 0 0" /> -->
+		<origin xyz="0.2 0 ${(base_z_size/2) + plate_offset + 0.05}" rpy="0 0 0" />
 	</joint>
 
 	<joint name="laserbox_to_laser" type="fixed">
@@ -153,11 +154,11 @@
 		<origin xyz="0 0 ${(laser_z_size/2)+ (0.01/2)}"/>
 	</joint>
 
-	<joint name="base_to_imu_link" type="fixed">
+	<!-- <joint name="base_to_imu_link" type="fixed">
 		<parent link="base_link"/>
 		<child link="imu_link"/>
 		<origin xyz="-0.050 -0.010 ${(base_z_size/2) + plate_offset + 0.02}" rpy="0 0 ${0}"/>
-	</joint>
+	</joint> -->
 
 	
 

@@ -1,6 +1,8 @@
 <launch>
-    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_base">
-      <!-- Parameters used to find the camera -->
-      <param name="publish_debug_topics" value="true"/>
-    </node>
+	<node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_base">
+		<param name="publish_debug_topics" value="true"/>
+		<param name="orientation_stddev" value="0.05"/>
+		<param name="stateless" value="false"/>
+		<param name="fixed_frame" value="odom"/>
+	</node>
 </launch>
