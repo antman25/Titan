@@ -16,7 +16,7 @@
 		/encoder_rr_wheel
 		/imu/data
 		/imu/mag
-		/imu/raw
+		/imu/data_raw
 		/initialpose
 		/joint_states
 		/joy_teleop/cmd_vel
@@ -38,7 +38,6 @@
 		/move_base_simple/goal
 		/odom
 		/particlecloud
-		/rpms
 		/scan
 		/tf
 		/tf_static
