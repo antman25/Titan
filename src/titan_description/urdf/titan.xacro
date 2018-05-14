@@ -157,7 +157,7 @@
 	<!-- <joint name="base_to_imu_link" type="fixed">
 		<parent link="base_link"/>
 		<child link="imu_link"/>
-		<origin xyz="-0.050 -0.010 ${(base_z_size/2) + plate_offset + 0.02}" rpy="0 0 ${0}"/>
+		<origin xyz="0 0 ${(base_z_size/2) + plate_offset + 0.02}" rpy="0 0 0"/>
 	</joint> -->
 
 	

@@ -47,7 +47,7 @@
       #Debug
 
       #output_timing: true
-      #pub_debug_output: true
+      pub_debug_output: true
 
     </rosparam>
     <remap from="scan" to="$(arg scan_topic)"/>
