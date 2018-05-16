@@ -3,12 +3,17 @@
 		<param name="publish_debug_topics" value="true"/>
 		<param name="orientation_stddev" value="0.05"/>
 		<param name="zeta" value="0.2"/>
+		<param name="world_frame" value="enu"/>
 		<param name="stateless" value="false"/>
+<<<<<<< 38c2abf3b77ba1c4af33f7e67c1a19cf7209e612
 		<param name="world_frame" value="enu"/>
 		<param name="fixed_frame" value="odom"/>
+=======
+		<param name="fixed_frame" value="base_link"/>
+>>>>>>> imu
 		<param name="publish_tf" value="false"/>
 		<param name="use_mag" value="false"/>
-		<!-- <param name="reverse_tf" value="false"/> -->
+		
 
 
 	</node>
