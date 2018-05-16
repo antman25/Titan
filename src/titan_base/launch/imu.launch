@@ -5,8 +5,8 @@
 		<param name="zeta" value="0.2"/>
 		<param name="stateless" value="false"/>
 		<param name="world_frame" value="enu"/>
-		<param name="fixed_frame" value="base_link"/>
-		<param name="publish_tf" value="true"/>
+		<param name="fixed_frame" value="odom"/>
+		<param name="publish_tf" value="false"/>
 		<param name="use_mag" value="false"/>
 		<!-- <param name="reverse_tf" value="false"/> -->
 
