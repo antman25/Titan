@@ -4,13 +4,7 @@
 		/amcl_pose
 		/camera/depth/points
 		/camera/depth_registered/points
-		/camera/depth_registered/sw_registered/image_rect
-		/camera/depth_registered/sw_registered/image_rect_raw
-		/camera/image_raw/compressed
-		/camera/rgb/image_color
 		/camera/rgb/image_color/compressed
-		/camera/rgb/image_raw
-		/camera/rgb/image_raw/compressed
 		/cmd_vel
 		/current_front_left
 		/current_front_right
