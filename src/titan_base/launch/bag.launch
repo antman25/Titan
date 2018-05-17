@@ -2,7 +2,9 @@
 	<node pkg="rosbag" type="record" name="robot_bag"
 		args="-o /home/nvidia/bags/titan.bag 
 		/amcl_pose
-		/camera/image_raw/compressed
+		/camera/depth/points
+		/camera/depth_registered/points
+		/camera/rgb/image_color/compressed
 		/cmd_vel
 		/current_front_left
 		/current_front_right
@@ -10,39 +12,74 @@
 		/current_rear_right
 		/debug
 		/diagnostics
+		/display_robot_state
+		/e_stop
 		/encoder_fl_wheel
 		/encoder_fr_wheel
 		/encoder_rl_wheel
 		/encoder_rr_wheel
 		/imu/data
-		/imu/mag
 		/imu/data_raw
+		/imu/mag
+		/imu/rpy/filtered
+		/imu/rpy/raw
+		/imu/temp
 		/initialpose
 		/joint_states
 		/joy_teleop/cmd_vel
+		/joy_teleop/joy
 		/map
 		/map_metadata
 		/map_updates
+		/move_base/DWAPlannerROS/cost_cloud
 		/move_base/DWAPlannerROS/global_plan
 		/move_base/DWAPlannerROS/local_plan
+		/move_base/DWAPlannerROS/parameter_descriptions
+		/move_base/DWAPlannerROS/parameter_updates
+		/move_base/DWAPlannerROS/trajectory_cloud
 		/move_base/NavfnROS/plan
+		/move_base/cancel
 		/move_base/current_goal
 		/move_base/feedback
 		/move_base/global_costmap/costmap
+		/move_base/global_costmap/costmap_updates
 		/move_base/global_costmap/footprint
+		/move_base/global_costmap/inflation/parameter_descriptions
+		/move_base/global_costmap/inflation/parameter_updates
+		/move_base/global_costmap/parameter_descriptions
+		/move_base/global_costmap/parameter_updates
+		/move_base/global_costmap/static/parameter_descriptions
+		/move_base/global_costmap/static/parameter_updates
 		/move_base/goal
 		/move_base/local_costmap/costmap
+		/move_base/local_costmap/costmap_updates
 		/move_base/local_costmap/footprint
+		/move_base/local_costmap/inflation/parameter_descriptions
+		/move_base/local_costmap/inflation/parameter_updates
+		/move_base/local_costmap/obstacles_laser/parameter_descriptions
+		/move_base/local_costmap/obstacles_laser/parameter_updates
+		/move_base/local_costmap/parameter_descriptions
+		/move_base/local_costmap/parameter_updates
+		/move_base/parameter_descriptions
+		/move_base/parameter_updates
 		/move_base/result
 		/move_base/status
 		/move_base_simple/goal
 		/odom
 		/particlecloud
+		/rosout
+		/rosout_agg
 		/scan
+		/set_pose
+		/tablet_cmd_vel
 		/tf
 		/tf_static
 		/titan_velocity_controller/cmd_vel
 		/titan_velocity_controller/odom
+		/twist_marker_server/cmd_vel
+		/twist_marker_server/feedback
+		/twist_marker_server/update
+		/twist_marker_server/update_full
 		/vel_sp_fl_wheel
 		/vel_sp_fr_wheel
 		/vel_sp_rl_wheel
@@ -51,5 +88,6 @@
 		/voltage_front_main
 		/voltage_rear_logic
 		/voltage_rear_main
+
 		"/>
 </launch>
