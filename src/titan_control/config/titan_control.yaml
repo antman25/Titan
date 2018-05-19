@@ -29,7 +29,7 @@ titan_velocity_controller:
   linear:
     x:
       has_velocity_limits    : true
-      max_velocity           : 1.5   # m/s
+      max_velocity           : 1.0   # m/s
       has_acceleration_limits: true
       max_acceleration       : 3.0   # m/s^2
   angular:
@@ -37,5 +37,5 @@ titan_velocity_controller:
       has_velocity_limits    : true
       max_velocity           : 1.5   # rad/s
       has_acceleration_limits: true
-      max_acceleration       : 3.0   # rad/s^2
+      max_acceleration       : 4.5   # rad/s^2
 

@@ -48,7 +48,7 @@
 	<xacro:include filename="$(find titan_description)/urdf/macros.xacro" />
 	<xacro:include filename="$(find titan_description)/urdf/wheel.xacro" />
 	<xacro:include filename="$(find titan_description)/urdf/titan.gazebo" />
-
+	<xacro:include filename="$(find titan_description)/urdf/sick_tim.urdf.xacro" />
 	
 
 	<link name="base_link">
@@ -87,17 +87,7 @@
 		</inertial> 
 	</link>
 
-	<link name="laserbox_link">
-		<visual name='laser_box'>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<geometry>
-				<box size="${laser_x_size} ${laser_y_size} ${laser_z_size}"/>
-			</geometry>
-			<material name="black"/>
-		</visual>
-	</link>
-
-	<link name="laser">
+	<!-- <link name="laser">
 		<visual name='laser'>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<geometry>
@@ -105,7 +95,8 @@
 			</geometry>
 			<material name="red"/>
 		</visual>
-	</link>
+	</link> -->
+	<xacro:sick_tim551 name="laser" ros_topic="scan" />
 
 	<link name="imu_link">	
 		<visual name='imu_box'>
@@ -141,18 +132,13 @@
         </joint>
 
 
-	<joint name="base_to_laserbox" type="fixed">
+	<joint name="base_to_laser" type="fixed">
 		<parent link="base_link"/>
-		<child link="laserbox_link"/>
+		<child link="laser_mount_link"/>
 		<!-- <origin xyz="0.025 0.08 ${(base_z_size/2) + plate_offset + laser_z_size}" rpy="0 0 0" /> -->
-		<origin xyz="0.2 0 ${(base_z_size/2) + plate_offset + 0.05}" rpy="0 0 0" />
+		<origin xyz="0.0 0.0 ${(base_z_size/2) + plate_offset + 0.05}" rpy="0 0 0" />
 	</joint>
 
-	<joint name="laserbox_to_laser" type="fixed">
-		<parent link="laserbox_link"/>
-		<child link="laser"/>
-		<origin xyz="0 0 ${(laser_z_size/2)+ (0.01/2)}"/>
-	</joint>
 
 	<joint name="base_to_imu_link" type="fixed">
 		<parent link="base_link"/>

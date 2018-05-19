@@ -8,9 +8,6 @@
 	<include file="$(find titan_base)/launch/laser.launch" />
 	<include file="$(find titan_control)/launch/titan_control.launch" />
 
-	<include file="$(find titan_navigation)/launch/move_base.launch">
-		<remap from="cmd_vel" to="/titan_velocity_controller/cmd_vel"/>
-	</include>
 </launch>
 
 
