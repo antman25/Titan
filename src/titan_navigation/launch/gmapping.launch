@@ -9,7 +9,7 @@
       base_frame: base_link
       map_frame: map
 
-      map_update_interval: 0.1 # Publish new map
+      map_update_interval: 1.0 # Publish new map
 
       maxUrange: 24.5 # Should be just less than sensor range
       maxRange: 25.1 # Should be just greater than sensor range
@@ -42,7 +42,7 @@
       llsamplestep: 0.01
       lasamplerange: 0.005
       lasamplestep: 0.005
-      minimumScore: 1000
+      minimumScore: 50
 
       #Debug
 
