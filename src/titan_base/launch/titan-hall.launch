@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-        <include file="$(find titan_base)/launch/titan-nomap.launch" />
-
 	<node name="map_server" pkg="map_server" type="map_server" args="$(find titan_navigation)/map/hallway.yaml"/>
-
+        <include file="$(find titan_base)/launch/titan-nomap.launch" />
 	<include file="$(find titan_navigation)/launch/amcl.launch" />
 
 	<!-- Move base -->

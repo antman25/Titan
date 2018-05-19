@@ -2,7 +2,7 @@
 	<node pkg="rosbag" type="record" name="robot_bag"
 		args="-o /home/nvidia/bags/titan.bag 
 		/amcl_pose
-		/camera/rgb/image_mono
+		/camera/rgb/image_mono/compressed
 		/cmd_vel
 		/current_front_left
 		/current_front_right

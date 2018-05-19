@@ -54,8 +54,8 @@ int main(int argc, char **argv)
 	poseStart.pose.covariance[7] = 0.25;
 	poseStart.pose.covariance[35] = 0.1;
 
-	poseStart.pose.pose.position.x = 0.5;
-	poseStart.pose.pose.position.y = 0.0;
+	poseStart.pose.pose.position.x = 0.22;
+	poseStart.pose.pose.position.y = -0.21;
 	poseStart.pose.pose.position.z = 0.0;
 
 	poseStart.pose.pose.orientation.x = 0.0;
