@@ -1,4 +1,4 @@
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="titan_wheel">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="titan_wheel">
 
 	<xacro:macro name="titan_wheel" params="wheel_prefix *joint_pose">
 		<link name="${wheel_prefix}_wheel_link">
