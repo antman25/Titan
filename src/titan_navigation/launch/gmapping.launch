@@ -9,7 +9,7 @@
       base_frame: base_link
       map_frame: map
 
-      map_update_interval: 0.1 # Publish new map
+      map_update_interval: 0.5 # Publish new map
 
       maxUrange: 24.5 # Should be just less than sensor range
       maxRange: 25.1 # Should be just greater than sensor range
@@ -27,7 +27,7 @@
       ymin: -100.0
       xmax: 100.0
       ymax: 100.0
-      delta: 0.05
+      delta: 0.025
 
       # All default
       sigma: 0.05
