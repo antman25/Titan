@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+        <include file="$(find titan_base)/launch/titan-nomap.launch" />
+
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find titan_navigation)/map/apartment.yaml"/>
+
+	<include file="$(find titan_navigation)/launch/amcl.launch" />
+
+	<!-- Move base -->
+	<include file="$(find titan_navigation)/launch/move_base.launch">
+		<remap from="cmd_vel" to="/titan_velocity_controller/cmd_vel"/>
+	</include>
+
+</launch>
+
+
+
+
