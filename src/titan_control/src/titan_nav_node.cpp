@@ -94,25 +94,48 @@ int main(int argc, char **argv)
         goal.target_pose.header.frame_id = "map";
         goal.target_pose.header.stamp = ros::Time::now();
 
-        goal.target_pose.pose.position.x = 2.5;
-        goal.target_pose.pose.position.y =  0;
-        goal.target_pose.pose.orientation.z = 0;
-        goal.target_pose.pose.orientation.w = 1;
+        goal.target_pose.pose.position.x = 10.2;
+        goal.target_pose.pose.position.y =  0.96;
+        goal.target_pose.pose.orientation.z = 0.48;
+        goal.target_pose.pose.orientation.w = 0.87;
 
         ac.sendGoal(goal);
         ac.waitForResult();
 	ROS_INFO("GOAL 1 reached");
 
 
-	goal.target_pose.pose.position.x = 5.0;
-        goal.target_pose.pose.position.y =  0;
-        goal.target_pose.pose.orientation.z = 0;
-        goal.target_pose.pose.orientation.w = 1;
+	goal.target_pose.pose.position.x = 11.6;
+        goal.target_pose.pose.position.y =  12.5;
+        goal.target_pose.pose.orientation.z = 0.72;
+        goal.target_pose.pose.orientation.w = 0.68;
 
         ac.sendGoal(goal);
         ac.waitForResult();  
 
 	ROS_INFO("Goal 2 reached");
+
+ 	goal.target_pose.pose.position.x = 11.4;
+        goal.target_pose.pose.position.y =  1.94;
+        goal.target_pose.pose.orientation.z = -0.937;
+        goal.target_pose.pose.orientation.w = 0.34;
+
+        ac.sendGoal(goal);
+        ac.waitForResult();  
+
+        ROS_INFO("Goal 3 reached");
+
+	goal.target_pose.pose.position.x = 0.25;
+        goal.target_pose.pose.position.y =  0.18;
+        goal.target_pose.pose.orientation.z = 0.999;
+        goal.target_pose.pose.orientation.w = 0;
+
+        ac.sendGoal(goal);
+        ac.waitForResult();  
+
+        ROS_INFO("Goal 4 reached");
+
+
+
 
 
 	return 0;
