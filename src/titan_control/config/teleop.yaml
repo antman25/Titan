@@ -1,9 +1,9 @@
 teleop_twist_joy:
   axis_linear: 1
-  scale_linear: 0.8
+  scale_linear: 0.5
   scale_linear_turbo: 2.5
   axis_angular: 0
-  scale_angular: 0.75
+  scale_angular: 0.7
   scale_angular_turbo: 1.7
   enable_button: 4
   enable_turbo_button: 5
