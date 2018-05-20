@@ -1,6 +1,6 @@
 <launch>
 	<node pkg="rosbag" type="record" name="robot_bag"
-		args="-o /home/nvidia/bags/titan.bag 
+		args="-j -o /home/nvidia/bags/titan.bag 
 		/amcl_pose
 		/camera/rgb/image_mono/compressed
 		/cmd_vel
