@@ -1,8 +1,12 @@
 <launch>
 	<node pkg="rosbag" type="record" name="robot_bag"
-		args="-j -o /home/nvidia/bags/titan.bag 
+		args="-o /home/nvidia/bags/titan.bag 
 		/amcl_pose
-		/camera/rgb/image_mono/compressed
+		/camera/rgb/image_color/compressed
+		/camera/data_throttled_camera_info
+		/camera/data_throttled_image/compressed
+		/camera/data_throttled_image_depth/compressed
+		
 		/cmd_vel
 		/current_front_left
 		/current_front_right
@@ -29,12 +33,6 @@
 		/map
 		/map_metadata
 		/map_updates
-		/move_base/DWAPlannerROS/cost_cloud
-		/move_base/DWAPlannerROS/global_plan
-		/move_base/DWAPlannerROS/local_plan
-		/move_base/DWAPlannerROS/parameter_descriptions
-		/move_base/DWAPlannerROS/parameter_updates
-		/move_base/DWAPlannerROS/trajectory_cloud
 		/move_base/NavfnROS/plan
 		/move_base/cancel
 		/move_base/current_goal

@@ -2,6 +2,7 @@
 <launch>
 	<include file="$(find titan_base)/launch/bag.launch" />
         <include file="$(find titan_base)/launch/r200_nodelet_rgbd.launch" />
+	<include file="$(find titan_base)/launch/camera_throttle.launch" />
 	<include file="$(find titan_base)/launch/serial.launch" />
 	<include file="$(find titan_base)/launch/hardware.launch" />
 	<include file="$(find titan_base)/launch/imu.launch" />
