@@ -9,7 +9,7 @@
  
   <!-- Choose visualization -->
   <arg name="rviz"                    default="false" />
-  <arg name="rtabmapviz"              default="false" /> 
+  <arg name="rtabmapviz"              default="true" /> 
   
   <!-- Localization-only mode -->
   <arg name="localization"            default="false"/>
