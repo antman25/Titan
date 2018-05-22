@@ -5,8 +5,7 @@
 		/camera/rgb/image_color/compressed
 		/camera/data_throttled_camera_info
 		/camera/data_throttled_image/compressed
-		/camera/data_throttled_image_depth/compressed
-		
+		/camera/data_throttled_image_depth/compressed		
 		/cmd_vel
 		/current_front_left
 		/current_front_right
