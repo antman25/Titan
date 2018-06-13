@@ -13,7 +13,7 @@
 
       maxUrange: 24.5 # Should be just less than sensor range
       maxRange: 25.1 # Should be just greater than sensor range
-      particles: 120 # Increased from 80
+      particles: 140 # Increased from 80
 
 
       # Update frequencies
@@ -42,12 +42,12 @@
       llsamplestep: 0.01
       lasamplerange: 0.005
       lasamplestep: 0.005
-      minimumScore: 50
+      minimumScore: 500
 
       #Debug
 
       #output_timing: true
-      pub_debug_output: true
+      pub_debug_output: false
 
     </rosparam>
     <remap from="scan" to="$(arg scan_topic)"/>
