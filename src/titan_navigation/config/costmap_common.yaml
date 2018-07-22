@@ -1,5 +1,5 @@
 footprint: [[-0.3, -0.2], [-0.3, 0.2], [0.3, 0.2], [0.3, -0.2]]
-footprint_padding: 0.025
+footprint_padding: 0.01
 
 robot_base_frame: base_link
 update_frequency: 1.0

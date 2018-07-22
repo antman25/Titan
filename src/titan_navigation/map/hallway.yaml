@@ -1,4 +1,4 @@
-image: hallway.pgm
+image: /home/nvidia/catkin_ws/src/titan/src/titan_navigation/map/hallway.pgm
 resolution: 0.025000
 origin: [-100.000000, -100.000000, 0.000000]
 negate: 0
