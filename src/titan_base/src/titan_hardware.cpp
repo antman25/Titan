@@ -135,6 +135,10 @@ void titan_hardware::updateMotorData(int motor, long encoderVal)
 void titan_hardware::cbMotorStatus(const titan_base::Status::ConstPtr &msg)
 {
 	//updateMotorData(MOTOR_FRONT_LEFT, msg->data);	
-	ROS_INFO("Update Motor Data %i\n", msg->DeviceId);
+	//ROS_INFO("Update Motor Data %i", msg->DeviceId);
+	int motor = msg->DeviceId - 1;
+	long encoderVal = msg->SensorPosition;
+	updateMotorData(motor,encoderVal);
+	
 }
 
