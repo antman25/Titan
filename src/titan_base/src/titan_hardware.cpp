@@ -31,23 +31,18 @@ titan_hardware::titan_hardware(ros::NodeHandle n, ros::NodeHandle p)
 	}
 	registerControlInterfaces();
 
-	subFrontLeftEncoder = nh.subscribe("encoder_fl_wheel", 10, &titan_hardware::cbFrontLeftEncoder,this);
-	subFrontRightEncoder = nh.subscribe("encoder_fr_wheel", 10, &titan_hardware::cbFrontRightEncoder,this);
-	subRearLeftEncoder = nh.subscribe("encoder_rl_wheel", 10, &titan_hardware::cbRearLeftEncoder,this);
-	subRearRightEncoder = nh.subscribe("encoder_rr_wheel", 10, &titan_hardware::cbRearRightEncoder,this);
+	subMotorStatus = nh.subscribe("motor_status", 10, &titan_hardware::cbMotorStatus,this);
+	
 
-	pubFrontLeftSetpoint = nh.advertise<std_msgs::Int64>("vel_sp_fl_wheel", 10);
-	pubFrontRightSetpoint = nh.advertise<std_msgs::Int64>("vel_sp_fr_wheel", 10);
-	pubRearLeftSetpoint = nh.advertise<std_msgs::Int64>("vel_sp_rl_wheel", 10);
-	pubRearRightSetpoint = nh.advertise<std_msgs::Int64>("vel_sp_rr_wheel", 10);
+	pubMotorVelocity = nh.advertise<titan_base::MotorVelocity>("motor_velocity", 10);
 
-	setWheelDiameter(0.1524);
-	setTicksPerRev(1296);
+	setWheelDiameter(0.097155*2.0);
+	setTicksPerRev(1024);
 }
 
 void titan_hardware::registerControlInterfaces()
 {
-	ros::V_string joint_names = boost::assign::list_of("front_left_wheel")("front_right_wheel")("rear_left_wheel")("rear_right_wheel");
+	ros::V_string joint_names = boost::assign::list_of("left_front_wheel")("left_mid_wheel")("left_rear_wheel")("right_front_wheel")("right_mid_wheel")("right_rear_wheel");
 	for (unsigned int i = 0; i < joint_names.size(); i++)
 	{
 		hardware_interface::JointStateHandle joint_state_handle(joint_names[i], &pos[i], &vel[i], &eff[i]);
@@ -58,21 +53,6 @@ void titan_hardware::registerControlInterfaces()
 	}
 	registerInterface(&jnt_state_interface);
 	registerInterface(&jnt_vel_interface);
-
-
-	/*ros::V_string arm_joint_names = boost::assign::list_of("link1_to_link2")("link2_to_link3");
-	for (unsigned int i = 0; i < arm_joint_names.size(); i++)
-	{
-		hardware_interface::JointStateHandle joint_state_handle(arm_joint_names[i], &pos[i], &vel[i], &eff[i]);
-		jnt_state_interface.registerHandle(joint_state_handle);
-	
-		hardware_interface::JointHandle joint_handle(joint_state_handle, &cmd[i]);
-		jnt_vel_interface.registerHandle(joint_handle);
-	}
-	registerInterface(&jnt_state_interface);
-	registerInterface(&jnt_vel_interface);*/
-
-	
 }
 
 
@@ -88,38 +68,25 @@ double titan_hardware::angularToLinear(const double &angle) const
 
 void titan_hardware::printDebug()
 {
-	/*ROS_INFO("Front Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_FRONT_LEFT] ,vel[MOTOR_FRONT_LEFT],cmd[MOTOR_FRONT_LEFT], angularToLinear(cmd[MOTOR_FRONT_LEFT]));
-	ROS_INFO("Front Right Join	t:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_FRONT_RIGHT] ,vel[MOTOR_FRONT_RIGHT],cmd[MOTOR_FRONT_RIGHT], angularToLinear(cmd[MOTOR_FRONT_RIGHT]));
-	ROS_INFO("Rear Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_REAR_LEFT] ,vel[MOTOR_REAR_LEFT],cmd[MOTOR_REAR_LEFT], angularToLinear(cmd[MOTOR_REAR_LEFT]));
-	ROS_INFO("Rear Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)\n\n", pos[MOTOR_REAR_RIGHT] ,vel[MOTOR_REAR_RIGHT],cmd[MOTOR_REAR_RIGHT], angularToLinear(cmd[MOTOR_REAR_RIGHT]));*/
+	ROS_INFO("Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_LEFT_MID] ,vel[MOTOR_LEFT_MID],cmd[MOTOR_LEFT_MID], angularToLinear(cmd[MOTOR_LEFT_MID]));
+	ROS_INFO("Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_RIGHT_MID] ,vel[MOTOR_RIGHT_MID],cmd[MOTOR_RIGHT_MID], angularToLinear(cmd[MOTOR_RIGHT_MID]));
+	
 }
 
 void titan_hardware::updateSetpoints()
 {
-	int tickVelFrontLeft = cmd[MOTOR_FRONT_LEFT] * ( TicksPerRev / ( 2 * PI) ) ;
-	int tickVelFrontRight = cmd[MOTOR_FRONT_RIGHT] * ( TicksPerRev / ( 2 * PI) ) ;
-	int tickVelRearLeft = cmd[MOTOR_REAR_LEFT] * ( TicksPerRev / ( 2 * PI) );
-	int tickVelRearRight = cmd[MOTOR_REAR_RIGHT] * ( TicksPerRev / ( 2 * PI) );
 
 	/*ROS_INFO("Front Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)", pos[MOTOR_FRONT_LEFT] ,vel[MOTOR_FRONT_LEFT], cmd[MOTOR_FRONT_LEFT], tickVelFrontLeft);
 	ROS_INFO("Front Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)", pos[MOTOR_FRONT_RIGHT] ,vel[MOTOR_FRONT_RIGHT], cmd[MOTOR_FRONT_RIGHT], tickVelFrontRight);
 	ROS_INFO("Rear Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)", pos[MOTOR_REAR_LEFT] ,vel[MOTOR_REAR_LEFT], cmd[MOTOR_REAR_LEFT], tickVelRearLeft);
 	ROS_INFO("Rear Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)\n\n", pos[MOTOR_REAR_RIGHT] ,vel[MOTOR_REAR_RIGHT],cmd[MOTOR_REAR_RIGHT],  tickVelRearRight);*/
 
-	std_msgs::Int64 msgVelFrontLeft;
-	std_msgs::Int64 msgVelFrontRight;
-	std_msgs::Int64 msgVelRearLeft;
-	std_msgs::Int64 msgVelRearRight;
+	titan_base::MotorVelocity msgMotorVelocity;
+	msgMotorVelocity.left_angular_vel = cmd[MOTOR_LEFT_MID];
+	msgMotorVelocity.right_angular_vel = cmd[MOTOR_RIGHT_MID];
 
-	msgVelFrontLeft.data = tickVelFrontLeft;
-	msgVelFrontRight.data = tickVelFrontRight;
-	msgVelRearLeft.data = tickVelRearLeft;
-	msgVelRearRight.data = tickVelRearRight;
-
-	pubFrontLeftSetpoint.publish(msgVelFrontLeft);
-	pubFrontRightSetpoint.publish(msgVelFrontRight);
-	pubRearLeftSetpoint.publish(msgVelRearLeft);
-	pubRearRightSetpoint.publish(msgVelRearRight);
+	pubMotorVelocity.publish(msgMotorVelocity);
+	
 }
 
 
@@ -165,23 +132,9 @@ void titan_hardware::updateMotorData(int motor, long encoderVal)
 	prevEncoderTime[motor] = currentTime;
 }
 
-void titan_hardware::cbFrontLeftEncoder(const std_msgs::Int64::ConstPtr& msg)
+void titan_hardware::cbMotorStatus(const titan_base::Status::ConstPtr &msg)
 {
-	updateMotorData(MOTOR_FRONT_LEFT, msg->data);	
-}
-
-void titan_hardware::cbFrontRightEncoder(const std_msgs::Int64::ConstPtr& msg)
-{
-	updateMotorData(MOTOR_FRONT_RIGHT, msg->data);
-}
-
-void titan_hardware::cbRearLeftEncoder(const std_msgs::Int64::ConstPtr& msg)
-{
-	updateMotorData(MOTOR_REAR_LEFT, msg->data);
-}
-
-void titan_hardware::cbRearRightEncoder(const std_msgs::Int64::ConstPtr& msg)
-{
-	updateMotorData(MOTOR_REAR_RIGHT, msg->data);
+	//updateMotorData(MOTOR_FRONT_LEFT, msg->data);	
+	ROS_INFO("Update Motor Data %i\n", msg->DeviceId);
 }
 

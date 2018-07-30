@@ -7,14 +7,16 @@
 #include <hardware_interface/joint_state_interface.h>
 #include <hardware_interface/robot_hw.h>
 
-#include <std_msgs/Float64.h>
-#include <std_msgs/Int64.h>
+#include <titan_base/Status.h>
+#include <titan_base/MotorVelocity.h>
 
-#define MOTOR_FRONT_LEFT	0
-#define MOTOR_FRONT_RIGHT	1
-#define MOTOR_REAR_LEFT		2
-#define MOTOR_REAR_RIGHT	3
-#define MOTOR_TOTAL		4
+#define MOTOR_LEFT_FRONT	0
+#define MOTOR_LEFT_MID		1
+#define MOTOR_LEFT_REAR		2
+#define MOTOR_RIGHT_FRONT	3
+#define MOTOR_RIGHT_MID		4
+#define MOTOR_RIGHT_REAR	5
+#define MOTOR_TOTAL		6
 
 #define PI			3.1415926
 
@@ -37,10 +39,7 @@ public:
 	void updateMotorData(int motor, long encoderVal);
 
 
-	void cbFrontLeftEncoder(const std_msgs::Int64::ConstPtr& msg);
-	void cbFrontRightEncoder(const std_msgs::Int64::ConstPtr& msg);
-	void cbRearLeftEncoder(const std_msgs::Int64::ConstPtr& msg);
-	void cbRearRightEncoder(const std_msgs::Int64::ConstPtr& msg);
+	void cbMotorStatus(const titan_base::Status::ConstPtr &msg);
 
 private:
 	ros::NodeHandle nh;
@@ -63,15 +62,10 @@ private:
 	long TicksPerRev;
 	double wheel_diameter;
 
-	ros::Subscriber subFrontLeftEncoder;
-	ros::Subscriber subFrontRightEncoder;
-	ros::Subscriber subRearLeftEncoder;
-	ros::Subscriber subRearRightEncoder;
+	ros::Subscriber subMotorStatus;
 
-	ros::Publisher pubFrontLeftSetpoint;
-	ros::Publisher pubFrontRightSetpoint;
-	ros::Publisher pubRearLeftSetpoint;
-	ros::Publisher pubRearRightSetpoint;
+	ros::Publisher pubMotorVelocity;
+
 };
 
 #endif // TITAN_HARDWARE_H
