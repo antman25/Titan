@@ -7,38 +7,23 @@
 
 	<xacro:property name="total_mass" value="15"/>
 	
-	<xacro:property name="plate_x" value="0.2286"/>
-	<xacro:property name="plate_y" value="0.3048"/>
-	<xacro:property name="plate_z" value="0.002286"/>
-	<xacro:property name="plate_offset" value="0.0508"/>
-	<xacro:property name="plate_mass" value="0.317515"/>
-
-	<xacro:property name="base_x_size" value="${plate_x*2}"/>
-	<xacro:property name="base_y_size" value="${plate_y}"/>
-	<xacro:property name="base_z_size" value="0.075"/>
-	<xacro:property name="base_mass" value="${plate_mass*2}"/>
+	<xacro:property name="base_x_size" value="0.7556"/>
+	<xacro:property name="base_y_size" value="0.4572"/>
+	<xacro:property name="base_z_size" value="0.0508"/>
+	<xacro:property name="base_mass" value="10"/>
 
 	<xacro:property name="laser_x_size" value="0.125"/>
 	<xacro:property name="laser_y_size" value="0.105"/>
 	<xacro:property name="laser_z_size" value="0.07"/>
 	<xacro:property name="laser_mass" value="0.05"/>
 
-	<xacro:property name="long_channel_x" value="0.4572"/>
-	<xacro:property name="long_channel_y" value="0.0381"/>
-	<xacro:property name="long_channel_z" value="0.002286"/>
-	<xacro:property name="long_channel_mass" value="0.1950447"/>
+	<xacro:property name="wheelbase" value="0.58" />
+	<xacro:property name="track" value="0.25" />
 
-	<xacro:property name="short_channel_x" value="0.4572"/>
-	<xacro:property name="short_channel_y" value="0.0381"/>
-	<xacro:property name="short_channel_mass" value="0.0952544"/>
+	<xacro:property name="wheel_vertical_offset" value="0.0" />
 
-	<xacro:property name="wheelbase" value="0.345" />
-	<xacro:property name="track" value="0.355" />
-
-	<xacro:property name="wheel_vertical_offset" value="0.0762" />
-
-	<xacro:property name="wheel_radius" value="0.0762" />
-	<xacro:property name="wheel_length" value="0.025" />
+	<xacro:property name="wheel_radius" value="0.097155" />
+	<xacro:property name="wheel_length" value="0.0508" />
 
 	<xacro:property name="camera_link" value="0.05" />
 
@@ -53,49 +38,31 @@
 
 	<link name="base_link">
 		<pose xyz="0 0 0" rpy="0 0 0" />
-		<!-- <inertial>
-			<mass value="${total_mass}" />
-			<origin xyz="0 0 ${(base_z_size/2) + plate_offset}" rpy=" 0 0 0"/>
-			<xacro:box_inertia m="${total_mass}" x="${base_x_size}" y="${base_y_size}" z="${base_z_size}" />
-		</inertial> -->
-
-		
 
 		<collision name='collision'>
-			<origin xyz="0 0 ${(base_z_size/2) + plate_offset}" rpy="0 0 0" />
+			<origin xyz="0 0 ${-(base_z_size/2)}" rpy="0 0 0" />
 			<geometry>
 				<box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
 			</geometry>
 		</collision>
 
 		<visual name='base_solid'>
-			<origin xyz="0 0 ${(base_z_size/2) + plate_offset}" rpy="0 0 0" />
+			<origin xyz="0 0 ${-(base_z_size/2)}" rpy="0 0 0" />
 			<geometry>
 				<box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
 			</geometry>
 			<material name="white"/>
 		</visual>
-		
-		
 	</link>
 
 	<link name="inertia_link">
 		<inertial>
 			<mass value="${total_mass}" />
-			<origin xyz="0 0 ${(base_z_size/2) + plate_offset}" rpy=" 0 0 0"/>
+			<origin xyz="0 0 0" rpy=" 0 0 0"/>
 			<xacro:box_inertia m="${total_mass}" x="${base_x_size}" y="${base_y_size}" z="${base_z_size}" />
 		</inertial> 
 	</link>
 
-	<!-- <link name="laser">
-		<visual name='laser'>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.01" radius="0.04"/>
-			</geometry>
-			<material name="red"/>
-		</visual>
-	</link> -->
 	<xacro:sick_tim551 name="laser" ros_topic="scan" />
 
 	<link name="imu_link">	
@@ -128,36 +95,48 @@
 	<joint name="base_to_camera" type="fixed">
                 <parent link="base_link"/>   
                 <child link="camera_link"/> 
-                <origin xyz="0.13 0.08 ${(base_z_size/2) + plate_offset + 0.3}" rpy="0 0 0" />
+                <origin xyz="0.13 0.08 ${(base_z_size/2) + 0.3}" rpy="0 0 0" />
         </joint>
 
 
 	<joint name="base_to_laser" type="fixed">
 		<parent link="base_link"/>
 		<child link="laser_mount_link"/>
-		<origin xyz="0.193 0.035 ${(base_z_size/2) + plate_offset + 0.05}" rpy="0 0 0" />
+		<origin xyz="0.31 0.0 0.08" rpy="0 0 0" />
 	</joint>
 
 
 	<joint name="base_to_imu_link" type="fixed">
 		<parent link="base_link"/>
 		<child link="imu_link"/>
-		<origin xyz="0 0 ${(base_z_size/2) + plate_offset + 0.02}" rpy="0 0 0"/>
+		<origin xyz="0 0 ${(base_z_size/2)  + 0.02}" rpy="0 0 0"/>
 	</joint>
 
 	
 
-	<xacro:titan_wheel wheel_prefix="front_left">
-		<origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+	<xacro:titan_wheel wheel_prefix="left_front">
+		<origin xyz="${track} ${wheelbase/2} ${wheel_vertical_offset}" rpy="0 0 0" />
 	</xacro:titan_wheel>
-	<xacro:titan_wheel wheel_prefix="front_right">
-		<origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+
+	<xacro:titan_wheel wheel_prefix="left_mid">
+                <origin xyz="0 ${wheelbase/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+        </xacro:titan_wheel>
+
+	<xacro:titan_wheel wheel_prefix="left_rear">
+		<origin xyz="${-track} ${wheelbase/2} ${wheel_vertical_offset}" rpy="0 0 0" />
 	</xacro:titan_wheel>
-	<xacro:titan_wheel wheel_prefix="rear_left">
-		<origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+
+
+	<xacro:titan_wheel wheel_prefix="right_front">
+		<origin xyz="${track} ${-wheelbase/2} ${wheel_vertical_offset}" rpy="0 0 0" />
 	</xacro:titan_wheel>
-	<xacro:titan_wheel wheel_prefix="rear_right">
-	<origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+
+	<xacro:titan_wheel wheel_prefix="right_mid">
+                <origin xyz="0 ${-wheelbase/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+        </xacro:titan_wheel>
+
+	<xacro:titan_wheel wheel_prefix="right_rear">
+		<origin xyz="${-track} ${-wheelbase/2} ${wheel_vertical_offset}" rpy="0 0 0" />
 	</xacro:titan_wheel>
 
 	<gazebo>

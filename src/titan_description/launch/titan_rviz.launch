@@ -1,18 +1,13 @@
-<?xml version="1.0"?>
 <launch>
 
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find titan_description)/urdf/titan.xacro'"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find titan_description)/rviz/urdf.rviz" />
 
-  <!-- send fake joint values -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="use_gui" value="False"/>
-  </node>
+  <param name="robot_description" command="$(find xacro)/xacro.py $(find titan_description)/urdf/titan.xacro" />
+  <param name="use_gui" value="$(arg gui)"/>
 
-  <!-- Combine joint values -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
-
-  <!-- Show in Rviz   -->
-  <node name="rviz" pkg="rviz" type="rviz"/>
-  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find titan_description)/launch/titan.rviz"/-->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
 </launch>
