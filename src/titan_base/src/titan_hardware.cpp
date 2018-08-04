@@ -31,10 +31,10 @@ titan_hardware::titan_hardware(ros::NodeHandle n, ros::NodeHandle p)
 	}
 	registerControlInterfaces();
 
-	subMotorStatus = nh.subscribe("motor_status", 10, &titan_hardware::cbMotorStatus,this);
+	subMotorStatus = nh.subscribe("motor_status", 1000, &titan_hardware::cbMotorStatus,this);
 	
 
-	pubMotorVelocity = nh.advertise<titan_base::MotorVelocity>("motor_velocity", 10);
+	pubMotorVelocity = nh.advertise<titan_base::MotorVelocity>("motor_velocity", 1000);
 
 	setWheelDiameter(0.097155*2.0);
 	setTicksPerRev(1024);
