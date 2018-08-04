@@ -11,7 +11,7 @@ void controlThread(ros::Rate rate, titan_hardware* robot, controller_manager::Co
     boost::chrono::duration<double> elapsed_duration = this_time - last_time;
     ros::Duration elapsed(elapsed_duration.count());
     last_time = this_time;
-    //robot->printDebug();
+    robot->printDebug();
     //robot->copyJointsFromHardware();
     cm->update(ros::Time::now(), elapsed);
     robot->updateSetpoints();
