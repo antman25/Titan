@@ -37,7 +37,7 @@ titan_hardware::titan_hardware(ros::NodeHandle n, ros::NodeHandle p)
 	pubMotorVelocity = nh.advertise<titan_base::MotorVelocity>("motor_velocity", 1000);
 
 	setWheelDiameter(0.097155*2.0);
-	setTicksPerRev(1024);
+	setTicksPerRev(2048);
 }
 
 void titan_hardware::registerControlInterfaces()
