@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
 	controller_manager
 	hardware_interface
 	std_msgs
+	genmsg
 	message_generation
 )
 
@@ -51,6 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(FILES
    Status.msg
    MotorVelocity.msg
+   PIDF.msg
  )
 
 ## Generate services in the 'srv' folder

@@ -68,8 +68,8 @@ double titan_hardware::angularToLinear(const double &angle) const
 
 void titan_hardware::printDebug()
 {
-	ROS_INFO("Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_LEFT_MID] ,vel[MOTOR_LEFT_MID],cmd[MOTOR_LEFT_MID], angularToLinear(cmd[MOTOR_LEFT_MID]));
-	ROS_INFO("Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_RIGHT_MID] ,vel[MOTOR_RIGHT_MID],cmd[MOTOR_RIGHT_MID], angularToLinear(cmd[MOTOR_RIGHT_MID]));
+	ROS_INFO("Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_LEFT_MID] ,vel[MOTOR_LEFT_MID],cmd[MOTOR_LEFT_MID], (float)angularToLinear(cmd[MOTOR_LEFT_MID]));
+	ROS_INFO("Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_RIGHT_MID] ,vel[MOTOR_RIGHT_MID],cmd[MOTOR_RIGHT_MID], (float)angularToLinear(cmd[MOTOR_RIGHT_MID]));
 	
 }
 
@@ -123,7 +123,8 @@ void titan_hardware::updateMotorData(int motor, long encoderVal)
 	}
 
 	ros::Duration deltaTime=currentTime-prevEncoderTime[motor];
-	long dDist = (encoderVal - prevEncoderValue[motor]) * 2.0;
+	long dDist = (encoderVal - prevEncoderValue[motor]);
+	ROS_INFO("dDist: %i", (int)dDist);
 	double dAngDist = dDist * ((2.0 * PI) / (double)2048.0);	
 	double dT = (double)deltaTime.toSec();
 	pos[motor] += dAngDist;
