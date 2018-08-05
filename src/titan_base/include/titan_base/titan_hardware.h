@@ -18,6 +18,9 @@
 #define MOTOR_RIGHT_REAR	5
 #define MOTOR_TOTAL		6
 
+#define LEFT_MASTER		MOTOR_LEFT_FRONT
+#define RIGHT_MASTER		MOTOR_RIGHT_FRONT
+
 #define PI			3.1415926
 
 class titan_hardware : public hardware_interface::RobotHW
