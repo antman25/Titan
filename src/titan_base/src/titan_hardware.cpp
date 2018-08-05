@@ -69,8 +69,13 @@ double titan_hardware::angularToLinear(const double &angle) const
 void titan_hardware::printDebug()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ROS_INFO("Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_LEFT_MID] ,vel[MOTOR_LEFT_MID],cmd[MOTOR_LEFT_MID], (float)angularToLinear(cmd[MOTOR_LEFT_MID]));
 	ROS_INFO("Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_RIGHT_MID] ,vel[MOTOR_RIGHT_MID],cmd[MOTOR_RIGHT_MID], (float)angularToLinear(cmd[MOTOR_RIGHT_MID]));
+=======
+	ROS_INFO("Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[LEFT_MASTER] ,vel[LEFT_MASTER],cmd[LEFT_MASTER], angularToLinear(cmd[LEFT_MASTER]));
+	ROS_INFO("Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[RIGHT_MASTER] ,vel[RIGHT_MASTER],cmd[RIGHT_MASTER], angularToLinear(cmd[RIGHT_MASTER]));
+>>>>>>> 56e6f7790a2e5125d6b3207b997308e43eadaa03
 =======
 	ROS_INFO("Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[LEFT_MASTER] ,vel[LEFT_MASTER],cmd[LEFT_MASTER], angularToLinear(cmd[LEFT_MASTER]));
 	ROS_INFO("Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[RIGHT_MASTER] ,vel[RIGHT_MASTER],cmd[RIGHT_MASTER], angularToLinear(cmd[RIGHT_MASTER]));
