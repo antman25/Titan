@@ -2,3 +2,5 @@ float32 P_Gain
 float32 I_Gain
 float32 D_Gain
 float32 F_Gain
+float32 FeedbackCoeff
+int32 RampRate
