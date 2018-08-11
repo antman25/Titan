@@ -68,8 +68,8 @@ double titan_hardware::angularToLinear(const double &angle) const
 
 void titan_hardware::printDebug()
 {
-	ROS_INFO("Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_LEFT_MID] ,vel[MOTOR_LEFT_MID],cmd[MOTOR_LEFT_MID], (float)angularToLinear(cmd[MOTOR_LEFT_MID]));
-	ROS_INFO("Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_RIGHT_MID] ,vel[MOTOR_RIGHT_MID],cmd[MOTOR_RIGHT_MID], (float)angularToLinear(cmd[MOTOR_RIGHT_MID]));
+	//ROS_INFO("Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_LEFT_MID] ,vel[MOTOR_LEFT_FRONT],cmd[MOTOR_LEFT_MID], (float)angularToLinear(cmd[MOTOR_LEFT_MID]));
+	//ROS_INFO("Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%f)", pos[MOTOR_RIGHT_MID] ,vel[MOTOR_RIGHT_FRONT],cmd[MOTOR_RIGHT_MID], (float)angularToLinear(cmd[MOTOR_RIGHT_MID]));
 	
 }
 
@@ -114,8 +114,8 @@ void titan_hardware::updateMotorData(int motor, long encoderVal)
 {
 	ros::Time currentTime=ros::Time::now();
 	//ROS_INFO("Updated Motor: %i - Data: %i", motor, (int)encoderVal);
-	if (motor != 1 || motor != 4)
-		return;
+	
+
 	if (initEncoder[motor] == false)
 	{
 		initEncoder[motor] = true;
@@ -126,11 +126,20 @@ void titan_hardware::updateMotorData(int motor, long encoderVal)
 
 	ros::Duration deltaTime=currentTime-prevEncoderTime[motor];
 	long dDist = (encoderVal - prevEncoderValue[motor]);
-	ROS_INFO("dDist: %i", (int)dDist);
 	double dAngDist = dDist * ((2.0 * PI) / (double)2048.0);	
 	double dT = (double)deltaTime.toSec();
-	pos[motor] += dAngDist;
-	vel[motor] = dAngDist / dT;
+
+	if (motor == LEFT_MASTER)
+	{
+		ROS_INFO("dDist: %i %f", (int)dDist, dAngDist);
+		pos[MOTOR_LEFT_FRONT] = pos[MOTOR_LEFT_MID] = pos[MOTOR_LEFT_REAR] += dAngDist;
+		vel[MOTOR_LEFT_FRONT] = vel[MOTOR_LEFT_MID] = vel[MOTOR_LEFT_REAR] = dAngDist / dT;
+	}
+	if (motor == RIGHT_MASTER)
+	{
+		pos[MOTOR_RIGHT_FRONT] = pos[MOTOR_RIGHT_MID] = pos[MOTOR_RIGHT_REAR] += dAngDist;
+                vel[MOTOR_RIGHT_FRONT] = vel[MOTOR_RIGHT_MID] = vel[MOTOR_RIGHT_REAR] = dAngDist / dT;
+	}
 	prevEncoderValue[motor] = encoderVal;
 	prevEncoderTime[motor] = currentTime;
 }

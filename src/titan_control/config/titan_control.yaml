@@ -35,7 +35,7 @@ titan_velocity_controller:
   angular:
     z:
       has_velocity_limits    : true
-      max_velocity           : 0.5   # rad/s
+      max_velocity           : 1.5   # rad/s
       has_acceleration_limits: true
-      max_acceleration       : 0.5   # rad/s^2
+      max_acceleration       : 6   # rad/s^2
 
