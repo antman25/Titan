@@ -98,8 +98,8 @@ class KeyTeleop():
         backward_max = rospy.get_param('~turbo/linear_backward_max', 0.5)
         self._backward = Velocity(backward_min, backward_max, self._num_steps)
 
-        angular_min = rospy.get_param('~turbo/angular_min', 0.7)
-        angular_max = rospy.get_param('~turbo/angular_max', 1.2)
+        angular_min = rospy.get_param('~turbo/angular_min', 3)
+        angular_max = rospy.get_param('~turbo/angular_max', 6.0)
         self._rotation = Velocity(angular_min, angular_max, self._num_steps)
 
     def run(self):
@@ -180,9 +180,9 @@ class SimpleKeyTeleop():
         self._interface = interface
         self._pub_cmd = rospy.Publisher('key_vel', Twist)
 
-        self._hz = rospy.get_param('~hz', 20)
+        self._hz = rospy.get_param('~hz', 50)
 
-        self._forward_rate = rospy.get_param('~forward_rate', 0.8)
+        self._forward_rate = rospy.get_param('~forward_rate', 0.5)
         self._backward_rate = rospy.get_param('~backward_rate', 0.5)
         self._rotation_rate = rospy.get_param('~rotation_rate', 1.0)
         self._last_pressed = {}
