@@ -126,12 +126,12 @@ void titan_hardware::updateMotorData(int motor, long encoderVal)
 
 	ros::Duration deltaTime=currentTime-prevEncoderTime[motor];
 	long dDist = (encoderVal - prevEncoderValue[motor]);
-	double dAngDist = dDist * ((2.0 * PI) / (double)2048.0);	
+	double dAngDist = dDist * ((2.0 * PI) / (double)2048.0 * 8);	
 	double dT = (double)deltaTime.toSec();
 
 	if (motor == LEFT_MASTER)
 	{
-		ROS_INFO("dDist: %i %f", (int)dDist, dAngDist);
+		//ROS_INFO("dDist: %i %f", (int)dDist, dAngDist);
 		pos[MOTOR_LEFT_FRONT] = pos[MOTOR_LEFT_MID] = pos[MOTOR_LEFT_REAR] += dAngDist;
 		vel[MOTOR_LEFT_FRONT] = vel[MOTOR_LEFT_MID] = vel[MOTOR_LEFT_REAR] = dAngDist / dT;
 	}
