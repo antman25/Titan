@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="robot_namespace" default="/"/>
+
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+
+  <group ns="$(arg robot_namespace)">
+
+      <include file="$(find titan_control)/launch/control.launch"/>
+
+      <!-- Include poincloud_to_laserscan if simulated Kinect is attached -->
+      <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">
+
+          <remap from="cloud_in" to="camera/depth/points"/>
+          <remap from="scan" to="scan"/>
+          <rosparam>
+              target_frame: base_link # Leave empty to output scan in the pointcloud frame
+              tolerance: 1.0
+              min_height: 0.05
+              max_height: 1.0
+
+              angle_min: -0.52 # -30.0*M_PI/180.0
+              angle_max: 0.52 # 30.0*M_PI/180.0
+              angle_increment: 0.005 # M_PI/360.0
+              scan_time: 0.3333
+              range_min: 0.45
+              range_max: 4.0
+              use_inf: true
+
+              # Concurrency level, affects number of pointclouds queued for processing and number of threads used
+              # 0 : Detect number of cores
+              # 1 : Single threaded
+              # 2->inf : Parallelism level
+              concurrency_level: 1
+          </rosparam>
+      </node>
+
+
+    <!-- Spawn robot in gazebo -->
+    <node name="spawn_titan_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x)
+              -y $(arg y)
+              -Y $(arg yaw)
+              -unpause
+              -urdf
+              -param robot_description
+              -model $(arg robot_namespace)" />
+
+  </group>
+
+</launch>

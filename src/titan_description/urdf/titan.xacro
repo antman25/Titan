@@ -75,6 +75,9 @@
 		</visual>
 	</link>
 
+	<gazebo reference="imu_link">
+  	</gazebo>
+
 	<link name="camera_link">
                 <visual name='camera_box'>
                         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -145,7 +148,7 @@
 		</plugin>
 	</gazebo>
 
-	<gazebo>
+	<!--<gazebo>
 		<plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
 			<updateRate>100.0</updateRate>
 			<robotNamespace>/</robotNamespace>
@@ -161,6 +164,21 @@
 			<odometryFrame>odom</odometryFrame>
 			<odometryTopic>odom</odometryTopic>
 			<broadcastTF>false</broadcastTF>
+		</plugin>
+	</gazebo> -->
+
+	<gazebo>
+		<plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+			<robotNamespace>$(arg robot_namespace)</robotNamespace>
+			<updateRate>50.0</updateRate>
+			<bodyName>base_link</bodyName>
+			<topicName>imu/data</topicName>
+			<accelDrift>0.005 0.005 0.005</accelDrift>
+			<accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+			<rateDrift>0.005 0.005 0.005 </rateDrift>
+			<rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+			<headingDrift>0.005</headingDrift>
+			<headingGaussianNoise>0.005</headingGaussianNoise>
 		</plugin>
 	</gazebo>
 	
