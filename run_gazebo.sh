@@ -6,4 +6,4 @@ sudo killall rviz
 sudo killall roscore
 sudo killall rosmaster
 
-roslaunch titan_gazebo titan_world.launch
+roslaunch titan_gazebo titan_playpen.launch

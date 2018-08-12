@@ -9,7 +9,7 @@
 
   <group ns="$(arg robot_namespace)">
 
-      <include file="$(find titan_control)/launch/control.launch"/>
+      <include file="$(find titan_control)/launch/titan_control.launch"/>
 
       <!-- Include poincloud_to_laserscan if simulated Kinect is attached -->
       <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">
