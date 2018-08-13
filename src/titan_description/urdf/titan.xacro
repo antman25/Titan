@@ -73,6 +73,11 @@
 			</geometry>
 			<material name="green"/>
 		</visual>
+		<inertial>
+                        <mass value="${0.005}" />
+                        <origin xyz="0 0 0" rpy=" 0 0 0"/>
+                        <xacro:box_inertia m="${0.005}" x="${0.05}" y="${0.05}" z="${0.05}" />
+                </inertial>
 	</link>
 
 	<gazebo reference="imu_link">
@@ -86,6 +91,12 @@
                         </geometry>
                         <material name="green"/>
                 </visual>
+		<inertial>
+                        <mass value="${0.05}" />
+                        <origin xyz="0 0 0" rpy=" 0 0 0"/>
+                        <xacro:box_inertia m="${0.005}" x="${0.05}" y="${0.05}" z="${0.05}" />
+                </inertial>
+
         </link>
 
 
