@@ -126,7 +126,7 @@ void titan_hardware::updateMotorData(int motor, long encoderVal)
 
 	ros::Duration deltaTime=currentTime-prevEncoderTime[motor];
 	long dDist = (encoderVal - prevEncoderValue[motor]);
-	double dAngDist = dDist * ((2.0 * PI) / (double)2048.0);	
+	double dAngDist = dDist * ((2.0 * PI) / 1000.0);	
 	double dT = (double)deltaTime.toSec();
 
 	if (motor == LEFT_MASTER)
