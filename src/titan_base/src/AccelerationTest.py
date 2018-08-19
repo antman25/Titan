@@ -13,31 +13,56 @@ import sys
 
 class AccelerationTest():
 	def __init__(self,bag_path):
-		self.bag = rosbag.Bag(bag_path + '/raw.bag','w')
+		#self.bag = rosbag.Bag(bag_path + '/raw.bag','w')
 		self.pidf_pub = rospy.Publisher('/set_pidf_param', PIDF, queue_size=10)
 		self.vel_pub = rospy.Publisher('/motor_velocity', MotorVelocity, queue_size=10)
 		self.left_motor_state = []
 		self.right_motor_state = []
 		self.left_sp = 0.0
 		self.right_sp = 0.0
+		
+		self.time_pts = []
+		self.pos_pts = []
+                self.error_pts = []
+                self.throttle_pts = []
+                self.vel_pts = []
+                self.sp_pts = []
+		self.accel_pts = []
+		self.prev_vel = 0
+		self.prev_time = 0
+
 		self.initPlot()
 		self.initROS()
 
+	def setSP(self,left_sp,right_sp):
+		self.left_sp = left_sp
+		self.right_sp = right_sp
 
 	def initPlot(self):
 		style.use('fivethirtyeight')
 		plt.close('all')
-		self.fig, self.axarr = plt.subplots(5,sharex=True)
+		#self.fig, self.axarr = plt.subplots(5,sharex=True)
 
 
 	def cbMotorStatus(self,status):
-		#timestamp = status.header.stamp.secs + (status.header.stamp.nsecs / 1.0e9)
-		#print status
-		#print self.bag
-		self.bag.write('/motor_status',status,rospy.get_rostime())
+
 		s = MotorState(status.header.stamp, status.SensorPosition, status.SensorVelocity, status.AppliedThrottle,status.CloseLoopErr)
 		if (status.DeviceId == 1):
+			if (len(self.accel_pts) == 0):
+				self.prev_vel = status.SensorVelocity
+				self.prev_time  = 0
 			self.left_motor_state.append(s)
+			self.time_pts.append(status.header.stamp.to_sec())
+			self.sp_pts.append(self.left_sp * (100.0 / (2*3.1415926)))
+			self.pos_pts.append(status.SensorPosition)
+			self.error_pts.append(status.CloseLoopErr)
+			self.throttle_pts.append(status.AppliedThrottle)
+			self.vel_pts.append(status.SensorVelocity)
+			dVel = status.SensorVelocity - self.prev_vel
+			dT = status.header.stamp.to_sec() - self.prev_time
+			self.accel_pts.append(dVel / dT)
+			self.prev_time = status.header.stamp.to_sec()
+			self.prev_vel = status.SensorVelocity
 			#print "LEFT: " + str(s)
 		if (status.DeviceId == 4):	
 			self.right_motor_state.append(s)
@@ -46,15 +71,15 @@ class AccelerationTest():
 
 	def publishPIDF(self):
 		pidf = PIDF()
-		pidf.P_Gain = 4.5
+		pidf.P_Gain = 0.0
 		pidf.I_Gain = 0.0
-		pidf.D_Gain = 0.05
-		pidf.F_Gain = 2.5
-		pidf.FeedbackCoeff = 1000.0 / (2048.0) 
-		pidf.RampRate = 50
+		pidf.D_Gain = 0.0
+		pidf.F_Gain = 0.9
+		pidf.FeedbackCoeff = 1000.0 / 2048.0 
+		pidf.RampRate = 0
 		r = rospy.Rate(5)
 		r.sleep()
-		self.bag.write('set_pidf_param', pidf,rospy.get_rostime())
+		#self.bag.write('set_pidf_param', pidf,rospy.get_rostime())
 		self.pidf_pub.publish(pidf)
 
 	def initROS(self):
@@ -64,20 +89,80 @@ class AccelerationTest():
 
 	def close(self):
 		self.status_sub.unregister()
-		self.bag.close()
-		self.bag.reindex()
-		self.axarr[0].clear()
-		self.axarr[1].clear()
-		self.axarr[2].clear()
-		self.axarr[3].clear()
-		self.axarr[4].clear()
 
-		#self.axarr[0].plot(self.time_pts,self.pos_pts)
-		#self.axarr[1].plot(self.time_pts,self.error_pts)
-		#self.axarr[2].plot(self.time_pts,self.throttle_pts)		
-		#self.axarr[3].plot(self.time_pts,self.vel_pts)
-		#self.axarr[4].plot(self.time_pts,self.sp_pts)
-		#plt.show()
+
+	def plotData(self):
+
+		print len(self.time_pts)
+		print len(self.pos_pts)
+		print len(self.accel_pts)
+		print len(self.sp_pts)
+
+		ax1 = plt.subplot(5, 1, 1)
+		ax1.plot(self.time_pts,self.pos_pts,'o-',label='pos')
+		ax1.set_xlabel('time [s]')
+		ax1.set_ylabel('pos [rev]',color='b')
+		ax1.set_title('Position vs SP')
+
+		ax2 = ax1.twinx()
+		ax2.plot(self.time_pts,self.sp_pts,'g--',label='sp')
+		ax2.set_ylabel('sp [rev/s]',color='g')
+
+
+		ax3 = plt.subplot(5, 1, 2)
+		ax3.plot(self.time_pts,self.vel_pts,'o-',label='vel')
+		ax3.set_xlabel('time [s]')
+		ax3.set_ylabel('vel [rev/s]',color='b')
+		ax3.set_title('Vel vs SP')
+
+		ax4 = ax3.twinx()
+		ax4.plot(self.time_pts,self.sp_pts,'g--',label='sp')
+		ax4.set_ylabel('sp [rev/s]',color='g')
+
+		ax5 = plt.subplot(5, 1, 3)
+		ax5.plot(self.time_pts,self.accel_pts,'o-',label='accel')
+		ax5.set_xlabel('time [s]')
+		ax5.set_ylabel('accel [rev/s^2]',color='b')
+		ax5.set_title('Accel vs SP')
+
+		ax6 = ax5.twinx()
+		ax6.plot(self.time_pts,self.sp_pts,'g--',label='sp')
+		ax6.set_ylabel('sp [rev]',color='g')
+
+		ax7 = plt.subplot(5, 1, 4)
+		ax7.plot(self.time_pts,self.error_pts,'o-',label='err')
+		ax7.set_xlabel('time [s]')
+		ax7.set_ylabel('err [rev/s]',color='b')
+		ax7.set_title('Error vs SP')
+
+		ax8 = ax7.twinx()
+		ax8.plot(self.time_pts,self.sp_pts,'g--',label='sp')
+		ax8.set_ylabel('sp [rev]',color='g')
+
+		ax9 = plt.subplot(5, 1, 5)
+		ax9.plot(self.time_pts,self.throttle_pts,'o-',label='throttle')
+		ax9.set_xlabel('time [s]')
+		ax9.set_ylabel('throttle',color='b')
+		ax9.set_title('Throttle vs SP')
+
+		ax10 = ax9.twinx()
+		ax10.plot(self.time_pts,self.sp_pts,'g--',label='sp')
+		ax10.set_ylabel('sp [rev]',color='g')
+
+
+		
+		#error_pts = self.error_pts
+		#error_pts.sort()
+		#vel_pts = self.vel_pts
+		#vel_pts.sort()
+
+		#accel_pts = self.accel_pts
+		#accel_pts.sort()
+		#print "Sorted Error: " + str(error_pts)
+		#print "Sorted Vel: " + str(self.vel_pts)
+		#print "ed Accel: " + str(self.accel_pts)
+
+		plt.show()
 
 	def sendMotorCommand(self,left_sp,right_sp):
 		cur_time = rospy.get_rostime()
@@ -105,6 +190,7 @@ class AccelerationTest():
 			d = MotorStateDelta(cur_state,prev_state)
 			prev_state = cur_state
 			print d
+
 		
 
 class MotorStateDelta():
@@ -146,10 +232,10 @@ class MotorStateDelta():
 class MotorState():
 	def __init__(self,timestamp,encoder_val,vel,throttle,err):
 		self.timestamp = timestamp		
-		self.encoder_val = encoder_val * (1.0 / 1000.0)
-		self.vel = vel * (10.0 / 1000.0)
+		self.encoder_val = encoder_val
+		self.vel = vel
 		self.throttle = throttle
-		self.err = err * (10.0 / 1000.0)
+		self.err = err 
 
 	#def __neg__(self,other):
 	#	return MotorStateDelta(self,other)
@@ -178,12 +264,13 @@ def Main():
 		if (cur_time - prev_time <= d):
 			
 			if (i % 2 == 1):
-				left_sp = 1.0 * 6.248
-				right_sp = 1.0 * 6.248
+				left_sp = 0.2#1.0 * 6.248
+				right_sp = 0.2#1.0 * 6.248
+				
 			else:
 				left_sp = 0.0
 				right_sp = 0.0
-			
+			a.setSP(left_sp,right_sp)
 			
 		else:
 			prev_time = rospy.get_rostime()
@@ -196,7 +283,7 @@ def Main():
 	#
 	a.close()
 	a.analyze()
-
+	a.plotData()
 	return
 
 if __name__ == '__main__':
