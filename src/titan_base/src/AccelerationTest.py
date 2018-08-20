@@ -4,6 +4,8 @@ import rospy
 import rosbag
 from titan_base.msg import *
 from std_msgs.msg import Float32
+from geometry_msgs.msg import Twist
+
 import numpy
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -15,7 +17,8 @@ class AccelerationTest():
 	def __init__(self,bag_path):
 		#self.bag = rosbag.Bag(bag_path + '/raw.bag','w')
 		self.pidf_pub = rospy.Publisher('/set_pidf_param', PIDF, queue_size=10)
-		self.vel_pub = rospy.Publisher('/motor_velocity', MotorVelocity, queue_size=10)
+		#self.vel_pub = rospy.Publisher('/motor_velocity', MotorVelocity, queue_size=10)
+		self.vel_pub = rospy.Publisher('/titan_velocity_controller/cmd_vel', Twist, queue_size=10)
 		self.left_motor_state = []
 		self.right_motor_state = []
 		self.left_sp = 0.0
@@ -34,14 +37,17 @@ class AccelerationTest():
 		self.initPlot()
 		self.initROS()
 
-	def setSP(self,left_sp,right_sp):
-		self.left_sp = left_sp
-		self.right_sp = right_sp
 
 	def initPlot(self):
 		style.use('fivethirtyeight')
 		plt.close('all')
 		#self.fig, self.axarr = plt.subplots(5,sharex=True)
+
+	def cbMotorVelocity(self,motor_cmd):
+		#motor_cmd.header.stamp.secs = cur_time.secs
+		#motor_cmd.header.stamp.nsecs = cur_time.nsecs
+		self.left_sp = motor_cmd.left_angular_vel
+		self.right_sp = motor_cmd.right_angular_vel
 
 
 	def cbMotorStatus(self,status):
@@ -74,7 +80,7 @@ class AccelerationTest():
 		pidf.P_Gain = 0.0
 		pidf.I_Gain = 0.0
 		pidf.D_Gain = 0.0
-		pidf.F_Gain = 0.9
+		pidf.F_Gain = 2.0
 		pidf.FeedbackCoeff = 1000.0 / 2048.0 
 		pidf.RampRate = 0
 		r = rospy.Rate(5)
@@ -85,6 +91,7 @@ class AccelerationTest():
 	def initROS(self):
 		rospy.init_node('Accel', anonymous=True)
 		self.status_sub = rospy.Subscriber("/motor_status", Status, self.cbMotorStatus)
+		self.motor_cmd_sub = rospy.Subscriber("/motor_velocity", MotorVelocity, self.cbMotorVelocity)
 		self.publishPIDF()
 
 	def close(self):
@@ -151,29 +158,39 @@ class AccelerationTest():
 
 
 		
-		#error_pts = self.error_pts
-		#error_pts.sort()
-		#vel_pts = self.vel_pts
-		#vel_pts.sort()
+		error_pts = self.error_pts
+		error_pts.sort()
+		vel_pts = self.vel_pts
+		vel_pts.sort()
 
-		#accel_pts = self.accel_pts
-		#accel_pts.sort()
-		#print "Sorted Error: " + str(error_pts)
-		#print "Sorted Vel: " + str(self.vel_pts)
-		#print "ed Accel: " + str(self.accel_pts)
+		accel_pts = self.accel_pts
+		accel_pts.sort()
+		print "Sorted Error: " + str(error_pts)
+		print "Sorted Vel: " + str(self.vel_pts)
+		print "ed Accel: " + str(self.accel_pts)
 
 		plt.show()
 
-	def sendMotorCommand(self,left_sp,right_sp):
-		cur_time = rospy.get_rostime()
-		motor_cmd = MotorVelocity()
-		motor_cmd.header.stamp.secs = cur_time.secs
-		motor_cmd.header.stamp.nsecs = cur_time.nsecs
-		motor_cmd.left_angular_vel = left_sp;
-		motor_cmd.right_angular_vel = right_sp;
-		motor_cmd.header.frame_id = ''
+	def sendMotorCommand(self,x_vel,yaw_vel):
+		#cur_time = rospy.get_rostime()
+		#motor_cmd = MotorVelocity()
+		#motor_cmd.header.stamp.secs = cur_time.secs
+		#motor_cmd.header.stamp.nsecs = cur_time.nsecs
+		#motor_cmd.left_angular_vel = left_sp;
+		#motor_cmd.right_angular_vel = right_sp;
+		#motor_cmd.header.frame_id = ''
 		#self.bag.write('/motor_velocity',motor_cmd,rospy.get_rostime())
 	
+		#self.vel_pub.publish(motor_cmd);
+
+		motor_cmd = Twist()
+		motor_cmd.linear.x = x_vel
+		motor_cmd.linear.y = 0.0
+		motor_cmd.linear.z = 0.0
+
+		motor_cmd.angular.x = 0.0
+		motor_cmd.angular.y = 0.0
+		motor_cmd.angular.z = yaw_vel
 		self.vel_pub.publish(motor_cmd);
 
 	def analyze(self):
@@ -218,8 +235,9 @@ class MotorStateDelta():
 		#self.ang_vel = self.angular_delta / self.time_delta
 		
 
-		print "State1: " + str(s1)
 		print "State2: " + str(s2)
+		print "State1: " + str(s1)
+		
 
 	#def tickToRad(self,tick)
 	#	return 
@@ -259,23 +277,25 @@ def Main():
 	end_duration = rospy.Duration.from_sec(4.5)
 	r = rospy.Rate(20)
 	i = 0
+	x_vel = 0
+	yaw_vel = 0
 	while not rospy.is_shutdown():
 		cur_time = rospy.get_rostime()
 		if (cur_time - prev_time <= d):
 			
 			if (i % 2 == 1):
-				left_sp = 0.2#1.0 * 6.248
-				right_sp = 0.2#1.0 * 6.248
+				x_vel = 0.5
+				yaw_vel = 0.0
 				
 			else:
-				left_sp = 0.0
-				right_sp = 0.0
-			a.setSP(left_sp,right_sp)
+				x_vel = 0.0
+				yaw_vel = 0.0
+			#a.setSP(left_sp,right_sp)
 			
 		else:
 			prev_time = rospy.get_rostime()
 			i = i+1
-		a.sendMotorCommand(left_sp,right_sp)
+		a.sendMotorCommand(x_vel,yaw_vel)
 		if (cur_time - start_time >= end_duration):
 			break
 		r.sleep()
