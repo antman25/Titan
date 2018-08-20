@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<!-- <include file="$(find titan_base)/launch/bag.launch" /> -->
-	<!-- <include file="$(find titan_base)/launch/motor.launch" /> -->
-	<include file="$(find titan_base)/launch/serial.launch" /> 
+	<include file="$(find titan_base)/launch/motor.launch" /> 
+	<!-- <include file="$(find titan_base)/launch/serial.launch" /> --> 
 	<include file="$(find titan_control)/launch/titan_control.launch" />
 	<include file="$(find titan_base)/launch/hardware.launch" />
 </launch>
