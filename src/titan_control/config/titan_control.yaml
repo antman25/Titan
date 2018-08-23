@@ -16,7 +16,7 @@ titan_velocity_controller:
   open_loop: false
   # Odometry fused with IMU is published by robot_localization, so
   # no need to publish a TF based on encoders alone.
-  enable_odom_tf: false
+  enable_odom_tf: true
 
   estimate_velocity_from_position: false
 
@@ -30,12 +30,17 @@ titan_velocity_controller:
     x:
       has_velocity_limits    : true
       max_velocity           : 1.0   # m/s
+      min_velocity           : -0.5  # m/s
       has_acceleration_limits: true
       max_acceleration       : 3.0   # m/s^2
+      has_jerk_limits        : false
+      max_jerk               : 5.0   # m/s^3
   angular:
     z:
       has_velocity_limits    : true
       max_velocity           : 3.0   # rad/s
       has_acceleration_limits: true
-      max_acceleration       : 6   # rad/s^2
+      max_acceleration       : 9.0   # rad/s^2
+      has_jerk_limits        : false   
+      max_jerk               : 1.5    # rad/s^3
 
