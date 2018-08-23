@@ -9,5 +9,5 @@ teleop_twist_joy:
   enable_turbo_button: 5
 joy_node:
   deadzone: 0.3
-  autorepeat_rate: 20
+  autorepeat_rate: 40
 
