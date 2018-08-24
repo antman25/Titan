@@ -110,7 +110,7 @@ long titan_hardware::getTicksPerRev()
     return TicksPerRev;
 }
 
-void titan_hardware::updateMotorData(int motor, long encoderVal)
+void titan_hardware::updateMotorData(int motor, long encoderVal, int32_t encoderVel)
 {
 	ros::Time currentTime=ros::Time::now();
 	//ROS_INFO("Updated Motor: %i - Data: %i", motor, (int)encoderVal);
@@ -126,19 +126,20 @@ void titan_hardware::updateMotorData(int motor, long encoderVal)
 
 	ros::Duration deltaTime=currentTime-prevEncoderTime[motor];
 	long dDist = (encoderVal - prevEncoderValue[motor]);
-	double dAngDist = dDist * ((2.0 * PI) / 1000.0);	
+	double dAngDist = dDist * ((2.0 * PI) / 1000.0);
+	double dAngVel = encoderVel * (10.0 / 1000.0) * 2.0 * 3.1415926;
 	double dT = (double)deltaTime.toSec();
 
 	if (motor == LEFT_MASTER)
 	{
 		//ROS_INFO("dDist: %i %f", (int)dDist, dAngDist);
 		pos[MOTOR_LEFT_FRONT] = pos[MOTOR_LEFT_MID] = pos[MOTOR_LEFT_REAR] += dAngDist;
-		vel[MOTOR_LEFT_FRONT] = vel[MOTOR_LEFT_MID] = vel[MOTOR_LEFT_REAR] = dAngDist / dT;
+		vel[MOTOR_LEFT_FRONT] = vel[MOTOR_LEFT_MID] = vel[MOTOR_LEFT_REAR] = dAngVel;
 	}
 	if (motor == RIGHT_MASTER)
 	{
 		pos[MOTOR_RIGHT_FRONT] = pos[MOTOR_RIGHT_MID] = pos[MOTOR_RIGHT_REAR] += dAngDist;
-                vel[MOTOR_RIGHT_FRONT] = vel[MOTOR_RIGHT_MID] = vel[MOTOR_RIGHT_REAR] = dAngDist / dT;
+                vel[MOTOR_RIGHT_FRONT] = vel[MOTOR_RIGHT_MID] = vel[MOTOR_RIGHT_REAR] = dAngVel;
 	}
 	prevEncoderValue[motor] = encoderVal;
 	prevEncoderTime[motor] = currentTime;
@@ -150,7 +151,8 @@ void titan_hardware::cbMotorStatus(const titan_base::Status::ConstPtr &msg)
 	//ROS_INFO("Update Motor Data %i", msg->DeviceId);
 	int motor = msg->DeviceId - 1;
 	long encoderVal = msg->SensorPosition;
-	updateMotorData(motor,encoderVal);
+	int32_t encoderVel = msg->SensorVelocity;
+	updateMotorData(motor,encoderVal,encoderVel);
 	
 }
 

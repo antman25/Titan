@@ -12,10 +12,10 @@
 		<!-- <remap from="odom" to="/odom_test" /> -->
 	</node>
 
-	<!-- <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
+	<node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
 		<rosparam command="load" file="$(find titan_control)/config/localization.yaml" />
 		<remap from="odometry/filtered" to="odom"/>
-	</node> -->
+	</node>
 
 	<!-- <node pkg="robot_localization" type="ekf_localization_node" name="global_ekf_localization">
                 <rosparam command="load" file="$(find titan_control)/config/global_localization.yaml" />

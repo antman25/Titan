@@ -39,7 +39,7 @@ public:
 	void setWheelDiameter(double val);
 	double getWheelDiameter();
 
-	void updateMotorData(int motor, long encoderVal);
+	void updateMotorData(int motor, long encoderVal, int32_t encoderVel);
 
 
 	void cbMotorStatus(const titan_base::Status::ConstPtr &msg);

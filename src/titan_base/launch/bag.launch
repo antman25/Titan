@@ -1,24 +1,9 @@
 <launch>
 	<node pkg="rosbag" type="record" name="robot_bag"
 		args="-o /home/nvidia/bags/titan.bag 
-		/amcl_pose
-		/camera/rgb/image_color/compressed
-		/camera/data_throttled_camera_info
-		/camera/data_throttled_image/compressed
-		/camera/data_throttled_image_depth/compressed		
 		/cmd_vel
-		/current_front_left
-		/current_front_right
-		/current_rear_left
-		/current_rear_right
 		/debug
-		/diagnostics
-		/display_robot_state
 		/e_stop
-		/encoder_fl_wheel
-		/encoder_fr_wheel
-		/encoder_rl_wheel
-		/encoder_rr_wheel
 		/imu/data
 		/imu/data_raw
 		/imu/mag
@@ -29,42 +14,29 @@
 		/joint_states
 		/joy_teleop/cmd_vel
 		/joy_teleop/joy
+		/key_vel
 		/map
-		/map_metadata
 		/map_updates
+		/motor_status
+		/motor_velocity
+		/move_base/DWAPlannerROS/global_plan
+		/move_base/DWAPlannerROS/local_plan
 		/move_base/NavfnROS/plan
-		/move_base/cancel
 		/move_base/current_goal
-		/move_base/feedback
 		/move_base/global_costmap/costmap
 		/move_base/global_costmap/costmap_updates
 		/move_base/global_costmap/footprint
-		/move_base/global_costmap/inflation/parameter_descriptions
-		/move_base/global_costmap/inflation/parameter_updates
-		/move_base/global_costmap/parameter_descriptions
-		/move_base/global_costmap/parameter_updates
-		/move_base/global_costmap/static/parameter_descriptions
-		/move_base/global_costmap/static/parameter_updates
-		/move_base/goal
 		/move_base/local_costmap/costmap
 		/move_base/local_costmap/costmap_updates
 		/move_base/local_costmap/footprint
-		/move_base/local_costmap/inflation/parameter_descriptions
-		/move_base/local_costmap/inflation/parameter_updates
-		/move_base/local_costmap/obstacles_laser/parameter_descriptions
-		/move_base/local_costmap/obstacles_laser/parameter_updates
-		/move_base/local_costmap/parameter_descriptions
-		/move_base/local_costmap/parameter_updates
-		/move_base/parameter_descriptions
-		/move_base/parameter_updates
-		/move_base/result
-		/move_base/status
 		/move_base_simple/goal
 		/odom
 		/particlecloud
-		/rosout
-		/rosout_agg
 		/scan
+		/servo1_angle_cmd
+		/servo2_angle_cmd
+		/servo3_angle_cmd
+		/set_pidf_param
 		/set_pose
 		/tablet_cmd_vel
 		/tf
@@ -75,14 +47,5 @@
 		/twist_marker_server/feedback
 		/twist_marker_server/update
 		/twist_marker_server/update_full
-		/vel_sp_fl_wheel
-		/vel_sp_fr_wheel
-		/vel_sp_rl_wheel
-		/vel_sp_rr_wheel
-		/voltage_front_logic
-		/voltage_front_main
-		/voltage_rear_logic
-		/voltage_rear_main
-
 		"/>
 </launch>
