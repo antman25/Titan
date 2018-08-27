@@ -2,5 +2,5 @@ controller_list:
   - name: titan_arm_controller
     action_ns: joint_trajectory_action
     type: FollowJointTrajectory
-    joints: [base_to_zaxis, link1_to_link2, link2_to_link3]
+    joints: [base_to_zaxis, link1_to_link2, link2_to_link3, link3_to_eef]
 

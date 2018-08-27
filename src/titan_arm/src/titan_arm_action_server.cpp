@@ -83,14 +83,14 @@ public:
 			std_msgs::Float32 ang3;
 			std_msgs::Float32 zaxis;
 
-			zaxis.data = position[0]
+			zaxis.data = positions[0];
 			ang1.data = positions[1] * (-180.0/3.14);
 			ang2.data = positions[2] * (-180.0/3.14);
 			ang3.data = positions[3] * (-180.0/3.14);
 
 			servo1cmd.publish(ang1);
 			servo2cmd.publish(ang2);
-			servo2cmd.publish(ang3);
+			servo3cmd.publish(ang3);
 			zaxiscmd.publish(zaxis);
 
 			for (int j=0;j<positions.size();j++)
