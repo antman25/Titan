@@ -38,6 +38,8 @@ protected:
 	control_msgs::FollowJointTrajectoryResult result_;
 	ros::Publisher servo1cmd;// = n.advertise<std_msgs::Float32>("/servo1_angle_cmd", 1000);
 	ros::Publisher servo2cmd;// = n.advertise<std_msgs::Float32>("/servo2_angle_cmd", 1000);
+	ros::Publisher servo3cmd;
+	ros::Publisher zaxiscmd;
 
 public:
 
@@ -46,6 +48,8 @@ public:
 		ROS_INFO("ROBOT TRAJECTORY FOLLOWER - INIT");
 		servo1cmd = nh_.advertise<std_msgs::Float32>("/servo1_angle_cmd", 1000);
 		servo2cmd = nh_.advertise<std_msgs::Float32>("/servo2_angle_cmd", 1000);
+		servo3cmd = nh_.advertise<std_msgs::Float32>("/servo3_angle_cmd", 1000);
+		zaxiscmd = nh_.advertise<std_msgs::Float32>("/z_axis_cmd", 1000);
 
     		//Register callback functions:
 		as_.registerGoalCallback(boost::bind(&RobotTrajectoryFollower::goalCB, this));
@@ -76,11 +80,18 @@ public:
 			ros::Duration time_from_start = points[i].time_from_start;
 			std_msgs::Float32 ang1;
 			std_msgs::Float32 ang2;
+			std_msgs::Float32 ang3;
+			std_msgs::Float32 zaxis;
 
+			zaxis.data = position[0]
 			ang1.data = positions[1] * (-180.0/3.14);
 			ang2.data = positions[2] * (-180.0/3.14);
+			ang3.data = positions[3] * (-180.0/3.14);
+
 			servo1cmd.publish(ang1);
 			servo2cmd.publish(ang2);
+			servo2cmd.publish(ang3);
+			zaxiscmd.publish(zaxis);
 
 			for (int j=0;j<positions.size();j++)
 			{
