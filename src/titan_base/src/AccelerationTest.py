@@ -52,7 +52,7 @@ class AccelerationTest():
 
 	def cbMotorStatus(self,status):
 
-		s = MotorState(status.header.stamp, status.SensorPosition, status.SensorVelocity, status.AppliedThrottle,status.CloseLoopErr)
+		s = MotorState(status.header.stamp, status.SensorPosition, status.SensorVelocity, status.AppliedThrottle,status.CloseLoopErr,self.left_sp * (100.0 / (2*3.1415926)))
 		if (status.DeviceId == 1):
 			if (len(self.accel_pts) == 0):
 				self.prev_vel = status.SensorVelocity
@@ -77,10 +77,10 @@ class AccelerationTest():
 
 	def publishPIDF(self):
 		pidf = PIDF()
-		pidf.P_Gain = 0.0
+		pidf.P_Gain = 3.0
 		pidf.I_Gain = 0.0
 		pidf.D_Gain = 0.0
-		pidf.F_Gain = 2.0
+		pidf.F_Gain = 3.0
 		pidf.FeedbackCoeff = 1000.0 / 2048.0 
 		pidf.RampRate = 0
 		r = rospy.Rate(5)
@@ -248,19 +248,20 @@ class MotorStateDelta():
 		#print "s1 Vel: " + str(s1.vel) + " [tick/100ms] s2 Vel: " + str(s1.vel) 
 
 class MotorState():
-	def __init__(self,timestamp,encoder_val,vel,throttle,err):
+	def __init__(self,timestamp,encoder_val,vel,throttle,err,sp):
 		self.timestamp = timestamp		
 		self.encoder_val = encoder_val
 		self.vel = vel
 		self.throttle = throttle
-		self.err = err 
+		self.err = err
+		self.sp = sp
 
 	#def __neg__(self,other):
 	#	return MotorStateDelta(self,other)
 
 	def __str__(self):
 		#angular = self.encoder_val * (1.0 / 2048.0) * (2.0 * 3.1415926)
-		return "Timestamp: " + str(self.timestamp.to_sec()) + " Encoder: " + str(self.encoder_val) + " [rev] Throttle: " + str(self.throttle) + " Err: " + str(self.err) + " Vel: " + str(self.vel) + " rev/s" 
+		return "Timestamp: " + str(self.timestamp.to_sec()) + " Encoder: " + str(self.encoder_val) + " [rev] Throttle: " + str(self.throttle) + " Err: " + str(self.err) + " Vel: " + str(self.vel) + " rev/s SP: " + str(self.sp) 
 
 
 
