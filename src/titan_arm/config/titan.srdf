@@ -11,7 +11,7 @@
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="arm_group">
         <joint name="base_to_zaxis" />
-        <joint name="zaxis_to_link1" />
+        <!-- <joint name="zaxis_to_link1" /> -->
         <joint name="link1_to_link2" />
         <joint name="link2_to_link3" />
     </group>
