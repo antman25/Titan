@@ -149,7 +149,7 @@ EEFGroup:
   projection_evaluator: joints(link2_to_link3,link3_to_eef)
   longest_valid_segment_fraction: 0.005
 ArmGroup:
-  default_planner_config: PRMkConfigDefault
+  default_planner_config: FMTkConfigDefault
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault
