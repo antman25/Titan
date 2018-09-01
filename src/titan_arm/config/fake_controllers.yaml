@@ -2,7 +2,7 @@ controller_list:
   - name: fake_EEFGroup_controller
     joints:
       - link3_to_eef
-  - name: fake_Arm Group_controller
+  - name: fake_ArmGroup_controller
     joints:
       - base_to_zaxis
       - link1_to_link2

@@ -146,8 +146,8 @@ EEFGroup:
     - LazyPRMstarkConfigDefault
     - SPARSkConfigDefault
     - SPARStwokConfigDefault
-Arm Group:
-  default_planner_config: NkConfigDefault
+ArmGroup:
+  default_planner_config: NonekConfigDefault
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault
