@@ -25,6 +25,11 @@
 	<xacro:property name="wheel_radius" value="0.09" />
 	<xacro:property name="wheel_length" value="0.0508" />
 
+	<xacro:property name="computer_x_size" value="0.23"/>
+	<xacro:property name="computer_y_size" value="0.19"/>
+	<xacro:property name="computer_z_size" value="0.11"/>
+	<xacro:property name="computer_mass" value="0.3"/>
+
 	<xacro:property name="arm_base_x_size" value="0.0381"/>
 	<xacro:property name="arm_base_y_size" value="0.1143"/>
 	<xacro:property name="arm_base_z_size" value="0.6096"/>
@@ -131,6 +136,10 @@
 
         </link>
 
+	<link name="computer_link">
+		<xacro:make_box x="0.0" y="0.0" z="0.0" roll="0" pitch="0" yaw="0" sizex="${computer_x_size}" sizey="${computer_y_size}" sizez="${computer_z_size}"/>		
+	</link>
+
 	<link name="arm_base_link">
 		<pose xyz="0 0 0" rpy="0 0 0" />
 		<xacro:box_inertia m="${arm_base_mass}" x="${arm_base_x_size}" y="${arm_base_y_size}" z="${arm_base_z_size}" />
@@ -181,6 +190,14 @@
 		<child link="laser_mount_link"/>
 		<origin xyz="0.31 0.0 0.08" rpy="0 0 0" />
 	</joint>
+
+	<joint name="base_to_computer" type="fixed">
+		<parent link="base_link"/>
+		<child link="computer_link"/>
+		<origin xyz="${computer_x_size/2 + 0.054} ${-computer_y_size/2} ${computer_z_size/2}" rpy="0 0 0" />
+	</joint>
+
+
 
 
 	<joint name="base_to_imu_link" type="fixed">
