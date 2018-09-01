@@ -1,6 +1,7 @@
 controller_list:
   - name: fake_EEFGroup_controller
     joints:
+      - link2_to_link3
       - link3_to_eef
   - name: fake_ArmGroup_controller
     joints:
