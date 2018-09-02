@@ -18,7 +18,7 @@
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="Home" group="ArmGroup">
-        <joint name="base_to_zaxis" value="0" />
+        <joint name="base_to_zaxis" value="0.0254" />
         <joint name="link1_to_link2" value="0" />
         <joint name="link2_to_link3" value="0" />
         <joint name="link3_to_eef" value="0" />
@@ -29,8 +29,14 @@
         <joint name="link2_to_link3" value="2.6374" />
         <joint name="link3_to_eef" value="0" />
     </group_state>
+    <group_state name="Load1" group="ArmGroup">
+        <joint name="base_to_zaxis" value="0" />
+        <joint name="link1_to_link2" value="-2.044" />
+        <joint name="link2_to_link3" value="-2.1758" />
+        <joint name="link3_to_eef" value="-0.5003" />
+    </group_state>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <virtual_joint name="virtual_arm_link" type="fixed" parent_frame="base_link" child_link="arm_base_link" />
+    <virtual_joint name="virtual_arm_link" type="fixed" parent_frame="arm_base_link" child_link="base_link" />
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="arm_base_link" link2="base_link" reason="Adjacent" />
     <disable_collisions link1="arm_base_link" link2="camera_link" reason="Never" />
@@ -41,7 +47,6 @@
     <disable_collisions link1="arm_base_link" link2="left_mid_wheel_link" reason="Never" />
     <disable_collisions link1="arm_base_link" link2="left_rear_wheel_link" reason="Never" />
     <disable_collisions link1="arm_base_link" link2="link1" reason="Never" />
-    <disable_collisions link1="arm_base_link" link2="link2" reason="Never" />
     <disable_collisions link1="arm_base_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="arm_base_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="arm_base_link" link2="right_rear_wheel_link" reason="Never" />
@@ -57,12 +62,15 @@
     <disable_collisions link1="base_link" link2="right_mid_wheel_link" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="right_rear_wheel_link" reason="Adjacent" />
     <disable_collisions link1="camera_link" link2="computer_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="end_effector" reason="Never" />
     <disable_collisions link1="camera_link" link2="imu_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="laser" reason="Never" />
     <disable_collisions link1="camera_link" link2="left_front_wheel_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="left_mid_wheel_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="left_rear_wheel_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="link1" reason="Never" />
+    <disable_collisions link1="camera_link" link2="link2" reason="Never" />
+    <disable_collisions link1="camera_link" link2="link3" reason="Never" />
     <disable_collisions link1="camera_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="right_rear_wheel_link" reason="Never" />
@@ -84,7 +92,6 @@
     <disable_collisions link1="imu_link" link2="left_mid_wheel_link" reason="Never" />
     <disable_collisions link1="imu_link" link2="left_rear_wheel_link" reason="Never" />
     <disable_collisions link1="imu_link" link2="link1" reason="Never" />
-    <disable_collisions link1="imu_link" link2="link2" reason="Never" />
     <disable_collisions link1="imu_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="imu_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="imu_link" link2="right_rear_wheel_link" reason="Never" />
@@ -100,12 +107,14 @@
     <disable_collisions link1="left_front_wheel_link" link2="left_mid_wheel_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="left_rear_wheel_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="link1" reason="Never" />
+    <disable_collisions link1="left_front_wheel_link" link2="link2" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="right_rear_wheel_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="left_rear_wheel_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="link1" reason="Never" />
+    <disable_collisions link1="left_mid_wheel_link" link2="link2" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="right_rear_wheel_link" reason="Never" />
@@ -124,7 +133,6 @@
     <disable_collisions link1="link1" link2="zaxis_base_link" reason="Adjacent" />
     <disable_collisions link1="link2" link2="link3" reason="Adjacent" />
     <disable_collisions link1="link2" link2="right_rear_wheel_link" reason="Never" />
-    <disable_collisions link1="link2" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="right_front_wheel_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="right_front_wheel_link" link2="right_rear_wheel_link" reason="Never" />
     <disable_collisions link1="right_front_wheel_link" link2="zaxis_base_link" reason="Never" />
