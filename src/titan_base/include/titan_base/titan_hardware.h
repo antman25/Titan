@@ -7,8 +7,8 @@
 #include <hardware_interface/joint_state_interface.h>
 #include <hardware_interface/robot_hw.h>
 
-#include <titan_base/Status.h>
-#include <titan_base/MotorVelocity.h>
+#include <titan_msgs/Status.h>
+#include <titan_msgs/MotorVelocity.h>
 
 #define MOTOR_LEFT_FRONT	0
 #define MOTOR_LEFT_MID		1
@@ -42,7 +42,7 @@ public:
 	void updateMotorData(int motor, long encoderVal, int32_t encoderVel);
 
 
-	void cbMotorStatus(const titan_base::Status::ConstPtr &msg);
+	void cbMotorStatus(const titan_msgs::Status::ConstPtr &msg);
 
 private:
 	ros::NodeHandle nh;

@@ -34,7 +34,7 @@ titan_hardware::titan_hardware(ros::NodeHandle n, ros::NodeHandle p)
 	subMotorStatus = nh.subscribe("motor_status", 1000, &titan_hardware::cbMotorStatus,this);
 	
 
-	pubMotorVelocity = nh.advertise<titan_base::MotorVelocity>("motor_velocity", 1000);
+	pubMotorVelocity = nh.advertise<titan_msgs::MotorVelocity>("motor_velocity", 1000);
 
 	setWheelDiameter(0.097155*2.0);
 	setTicksPerRev(2048);
@@ -81,7 +81,7 @@ void titan_hardware::updateSetpoints()
 	ROS_INFO("Rear Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)", pos[MOTOR_REAR_LEFT] ,vel[MOTOR_REAR_LEFT], cmd[MOTOR_REAR_LEFT], tickVelRearLeft);
 	ROS_INFO("Rear Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)\n\n", pos[MOTOR_REAR_RIGHT] ,vel[MOTOR_REAR_RIGHT],cmd[MOTOR_REAR_RIGHT],  tickVelRearRight);*/
 
-	titan_base::MotorVelocity msgMotorVelocity;
+	titan_msgs::MotorVelocity msgMotorVelocity;
 	msgMotorVelocity.left_angular_vel = cmd[LEFT_MASTER];
 	msgMotorVelocity.right_angular_vel = cmd[RIGHT_MASTER];
 
@@ -145,7 +145,7 @@ void titan_hardware::updateMotorData(int motor, long encoderVal, int32_t encoder
 	prevEncoderTime[motor] = currentTime;
 }
 
-void titan_hardware::cbMotorStatus(const titan_base::Status::ConstPtr &msg)
+void titan_hardware::cbMotorStatus(const titan_msgs::Status::ConstPtr &msg)
 {
 	//updateMotorData(MOTOR_FRONT_LEFT, msg->data);	
 	//ROS_INFO("Update Motor Data %i", msg->DeviceId);
