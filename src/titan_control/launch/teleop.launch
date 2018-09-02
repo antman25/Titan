@@ -4,7 +4,7 @@
 	<arg name="joy_dev" default="/dev/input/js0" />
 	<!-- <arg name="joystick" default="true" /> -->
 
-	<group ns="joy_teleop">
+	<!-- <group ns="joy_teleop">
 
 		<rosparam command="load" file="$(find titan_control)/config/teleop.yaml" />
 
@@ -13,6 +13,10 @@
 		</node>
 
 		<node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy" />
-	</group>
+	</group> -->
+
+	<node pkg="joy" type="joy_node" name="joy_node">
+		<param name="dev" value="$(arg joy_dev)" />
+        </node>	
 
 </launch>
