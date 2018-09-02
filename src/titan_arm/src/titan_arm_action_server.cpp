@@ -104,7 +104,8 @@ public:
 			{
 				ROS_INFO("GOAL[%i] - Pos[%i] = %f", i,j,(float)positions[j]);
 			}
-                        ros::Duration(0.1).sleep();
+			ROS_INFO("Waiting %f",(float)time_from_start.toSec());
+                        //ros::Duration(0.1).sleep();
                         //time_from_start.sleep();
 		}
 		
