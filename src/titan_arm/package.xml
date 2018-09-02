@@ -5,8 +5,8 @@
   <description>
      An automatically generated package with all the configuration and launch files for using the titan with the MoveIt! Motion Planning Framework
   </description>
-  <author email="bobo@monkey.net">antman</author>
-  <maintainer email="bobo@monkey.net">antman</maintainer>
+  <author email="anthony.magner@gmail.com">antman</author>
+  <maintainer email="anthony.magner@gmail.com">antman</maintainer>
 
   <license>BSD</license>
 
@@ -17,6 +17,7 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <run_depend>moveit_ros_move_group</run_depend>
+  <run_depend>moveit_fake_controller_manager</run_depend>
   <run_depend>moveit_kinematics</run_depend>
   <run_depend>moveit_planners_ompl</run_depend>
   <run_depend>moveit_ros_visualization</run_depend>
@@ -26,27 +27,7 @@
   <!-- This package is referenced in the warehouse launch files, but does not build out of the box at the moment. Commented the dependency until this works. -->
   <!-- <run_depend>warehouse_ros_mongo</run_depend> -->
   <build_depend>titan_description</build_depend>
-  <build_depend>controller_manager</build_depend>
-  <build_depend>hardware_interface</build_depend>
-  <build_depend>control_toolbox</build_depend> 	
-  <build_depend>roscpp</build_depend>
-  <build_depend>roslaunch</build_depend>
-  <build_depend>roslint</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>sensor_msgs</build_depend>	
-  <build_depend>actionlib</build_depend>
-  <build_depend>titan_msgs</build_depend>
-
   <run_depend>titan_description</run_depend>
-  <run_depend>controller_manager</run_depend>
-  <run_depend>titan_msgs</run_depend>
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>hardware_interface</run_depend>
-  <run_depend>actionlib</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <run_depend>std_msgs</run_depend>    
-  <run_depend>control_toolbox</run_depend>
 
 
 </package>

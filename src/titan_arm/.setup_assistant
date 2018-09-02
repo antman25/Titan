@@ -7,5 +7,5 @@ moveit_setup_assistant_config:
     relative_path: config/titan.srdf
   CONFIG:
     author_name: antman
-    author_email: bobo@monkey.net
-    generated_timestamp: 1535816584
+    author_email: anthony.magner@gmail.com
+    generated_timestamp: 1535908238
