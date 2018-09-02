@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
 	roslaunch
 	controller_manager
         actionlib
+	titan_msgs
 	hardware_interface
 )
 
@@ -16,7 +17,7 @@ find_package(Boost REQUIRED COMPONENTS system chrono)
 catkin_package(
 #	INCLUDE_DIRS include
 #  LIBRARIES titan_hardware
-	CATKIN_DEPENDS roscpp control_toolbox hardware_interface std_msgs actionlib
+	CATKIN_DEPENDS roscpp control_toolbox hardware_interface std_msgs titan_msgs actionlib
 #  DEPENDS system_lib
 )
 

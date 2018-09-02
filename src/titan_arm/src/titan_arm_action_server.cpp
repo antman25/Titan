@@ -14,8 +14,7 @@
 #include <trajectory_msgs/JointTrajectoryPoint.h>
 
 
-
-
+#include <titan_msgs/ArmCmd.h>
 #include <controller_manager/controller_manager.h>
 #include <boost/chrono.hpp>
 #include <boost/thread.hpp>
@@ -36,20 +35,22 @@ protected:
 	std::string action_name_;
 	control_msgs::FollowJointTrajectoryFeedback feedback_;
 	control_msgs::FollowJointTrajectoryResult result_;
-	ros::Publisher servo1cmd;// = n.advertise<std_msgs::Float32>("/servo1_angle_cmd", 1000);
-	ros::Publisher servo2cmd;// = n.advertise<std_msgs::Float32>("/servo2_angle_cmd", 1000);
-	ros::Publisher servo3cmd;
-	ros::Publisher zaxiscmd;
+	//ros::Publisher servo1cmd;// = n.advertise<std_msgs::Float32>("/servo1_angle_cmd", 1000);
+	//ros::Publisher servo2cmd;// = n.advertise<std_msgs::Float32>("/servo2_angle_cmd", 1000);
+	//ros::Publisher servo3cmd;
+	//ros::Publisher zaxiscmd;
+	ros::Publisher pubArmCmd;// = nh_.advertise<titan_msgs::ArmCmd>("/arm_cmd", 1000);
 
 public:
 
 	RobotTrajectoryFollower(std::string name) : as_(nh_, name, false), action_name_(name)
 	{
 		ROS_INFO("ROBOT TRAJECTORY FOLLOWER - INIT");
-		servo1cmd = nh_.advertise<std_msgs::Float32>("/servo1_angle_cmd", 1000);
-		servo2cmd = nh_.advertise<std_msgs::Float32>("/servo2_angle_cmd", 1000);
-		servo3cmd = nh_.advertise<std_msgs::Float32>("/servo3_angle_cmd", 1000);
-		zaxiscmd = nh_.advertise<std_msgs::Float32>("/z_axis_cmd", 1000);
+		//servo1cmd = nh_.advertise<std_msgs::Float32>("/servo1_angle_cmd", 1000);
+		//servo2cmd = nh_.advertise<std_msgs::Float32>("/servo2_angle_cmd", 1000);
+		//servo3cmd = nh_.advertise<std_msgs::Float32>("/servo3_angle_cmd", 1000);
+		//zaxiscmd = nh_.advertise<std_msgs::Float32>("/z_axis_cmd", 1000);
+		pubArmCmd = nh_.advertise<titan_msgs::ArmCmd>("/arm_cmd", 1000);
 
     		//Register callback functions:
 		as_.registerGoalCallback(boost::bind(&RobotTrajectoryFollower::goalCB, this));
@@ -78,21 +79,27 @@ public:
 		{
 			std::vector<double> positions = points[i].positions;
 			ros::Duration time_from_start = points[i].time_from_start;
-			std_msgs::Float32 ang1;
-			std_msgs::Float32 ang2;
-			std_msgs::Float32 ang3;
-			std_msgs::Float32 zaxis;
+			float ang1 = 0;
+			float ang2 = 0;
+			float ang3 = 0;
+			float zaxis = 0;
 
-			zaxis.data = positions[0];
-			ang1.data = positions[1] * (-180.0/3.14);
-			ang2.data = positions[2] * (-180.0/3.14);
-			ang3.data = positions[3] * (-180.0/3.14);
+			zaxis = positions[0];
+			ang1 = positions[1] * (-180.0/3.14);
+			ang2 = positions[2] * (-180.0/3.14);
+			ang3 = positions[3] * (-180.0/3.14);
 
-			servo1cmd.publish(ang1);
-			servo2cmd.publish(ang2);
-			servo3cmd.publish(ang3);
-			zaxiscmd.publish(zaxis);
-
+			//servo1cmd.publish(ang1);
+			//servo2cmd.publish(ang2);
+			//servo3cmd.publish(ang3);
+			//zaxiscmd.publish(zaxis);
+			titan_msgs::ArmCmd arm_cmd;
+			arm_cmd.z_axis_pos = zaxis;
+			arm_cmd.servo1_pos = ang1;
+			arm_cmd.servo2_pos = ang2;
+			arm_cmd.servo3_pos = ang3;
+			pubArmCmd.publish(arm_cmd);
+			
 			for (int j=0;j<positions.size();j++)
 			{
 				ROS_INFO("GOAL[%i] - Pos[%i] = %f", i,j,(float)positions[j]);

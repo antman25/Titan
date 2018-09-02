@@ -35,11 +35,11 @@
   <build_depend>std_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>	
   <build_depend>actionlib</build_depend>
-
+  <build_depend>titan_msgs</build_depend>
 
   <run_depend>titan_description</run_depend>
   <run_depend>controller_manager</run_depend>
-
+  <run_depend>titan_msgs</run_depend>
   <run_depend>geometry_msgs</run_depend>
   <run_depend>hardware_interface</run_depend>
   <run_depend>actionlib</run_depend>
