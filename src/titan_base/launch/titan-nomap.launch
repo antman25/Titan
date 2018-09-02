@@ -11,6 +11,7 @@
 	<!-- <include file="$(find titan_base)/launch/laser.launch" /> -->
 	<include file="$(find titan_control)/launch/titan_control.launch" />
 	<include file="$(find titan_control)/launch/teleop.launch" />
+	<!-- <include file="$(find titan_arm)/launch/arm.launch" /> -->
 </launch>
 
 

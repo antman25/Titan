@@ -1,9 +1,7 @@
 controller_list:
-  - name: fake_arm_group_controller
+  - name: fake_ArmGroup_controller
     joints:
       - base_to_zaxis
       - link1_to_link2
       - link2_to_link3
-  - name: fake_EEF_Group_controller
-    joints:
       - link3_to_eef
