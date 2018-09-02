@@ -74,7 +74,7 @@ public:
 
 		std::vector<trajectory_msgs::JointTrajectoryPoint> points = trajectory.points;
 		ROS_INFO("GOAL ACCEPTED - %i Total Points", (int)points.size());
-		
+		ros::Time start_time = trajectory.header.stamp;
 		for (int i=0; i<points.size(); ++i)
 		{
 			std::vector<double> positions = points[i].positions;

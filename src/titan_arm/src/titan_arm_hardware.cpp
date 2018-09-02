@@ -43,9 +43,9 @@ void titan_arm_hardware::registerControlInterfaces()
 
 void titan_arm_hardware::read()
 {
-	/*ROS_INFO("Base to Zaxis -- Pos: %f cmd: %f", pos[0], cmd[0]);
+	ROS_INFO("Base to Zaxis -- Pos: %f cmd: %f", pos[0], cmd[0]);
 	ROS_INFO("Link1 to Link2 -- Pos: %f cmd: %f", pos[1], cmd[1]);
-	ROS_INFO("Link2 to Link3 -- Pos: %f cmd: %f\n", pos[2], cmd[2]);*/
+	ROS_INFO("Link2 to Link3 -- Pos: %f cmd: %f\n", pos[2], cmd[2]);
 	/*ROS_INFO("Front Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)", pos[MOTOR_FRONT_LEFT] ,vel[MOTOR_FRONT_LEFT], cmd[MOTOR_FRONT_LEFT], tickVelFrontLeft);
 	ROS_INFO("Front Right Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)", pos[MOTOR_FRONT_RIGHT] ,vel[MOTOR_FRONT_RIGHT], cmd[MOTOR_FRONT_RIGHT], tickVelFrontRight);
 	ROS_INFO("Rear Left Joint:\n\tPos: %f\n\tVel: %f\n\tcmd: %f (%i)", pos[MOTOR_REAR_LEFT] ,vel[MOTOR_REAR_LEFT], cmd[MOTOR_REAR_LEFT], tickVelRearLeft);
