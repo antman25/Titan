@@ -315,7 +315,7 @@
 		<wheelSeparation>0.68</wheelSeparation>
 		<wheelDiameter>0.18</wheelDiameter>
 		<torque>20</torque>
-		<commandTopic>/cmd_vel</commandTopic>
+		<commandTopic>/titan_velocity_controller/cmd_vel</commandTopic>
 		<odometryTopic>/odom</odometryTopic>
 		<odometryFrame>map</odometryFrame>
 		<robotBaseFrame>base_link</robotBaseFrame>

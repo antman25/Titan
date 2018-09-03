@@ -13,6 +13,7 @@
           <remap from="depth/image" to="/camera/aligned_depth_to_color/image_raw"/>
           <remap from="rgb/camera_info" to="/camera/color/camera_info"/>
 
+
           <param name="queue_size" type="int" value="10"/>
 
           <!-- RTAB-Map's parameters -->

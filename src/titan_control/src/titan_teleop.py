@@ -148,9 +148,10 @@ class MoveitJoy:
     def parseSRDF(self):
 	print "test"
         ri = RobotInterface("/robot_description")
-	print "test2"
+	#print "test2"
         planning_groups = {}
-        for g in ri.get_group_names():
+        #for g in ri.get_group_names():
+	for g in ['ArmGroup']:
             self.planning_groups_tips[g] = ri.get_group_joint_tips(g)
             planning_groups[g] = ["/rviz/moveit/move_marker/goal_" + l
                                   for l in self.planning_groups_tips[g]]
@@ -162,6 +163,8 @@ class MoveitJoy:
         self.planning_groups = planning_groups
         self.planning_groups_keys = planning_groups.keys()   #we'd like to store the 'order'
         self.frame_id = ri.get_planning_frame()
+
+
     def __init__(self):
         self.initial_poses = {}
         self.planning_groups_tips = {}
@@ -189,6 +192,7 @@ class MoveitJoy:
                                                        InteractiveMarkerInit,
                                                        self.markerCB, queue_size=1)
         self.sub = rospy.Subscriber("/joy", Joy, self.joyCB, queue_size=1)
+
     def updatePlanningGroup(self, next_index):
         if next_index >= len(self.planning_groups_keys):
             self.current_planning_group_index = 0
@@ -263,17 +267,11 @@ class MoveitJoy:
             finally:
                 self.marker_lock.release()
     def joyCB(self, msg):
-        #if len(msg.axes) == 27 and len(msg.buttons) == 19:
-        #    status = PS3WiredStatus(msg)
-        #elif len(msg.axes) == 8 and len(msg.buttons) == 11:
-        #    status = XBoxStatus(msg)
-        #elif len(msg.axes) == 20 and len(msg.buttons) == 17:
-        #    status = PS3Status(msg)
-        #else:
-        #   raise Exception("Unknown joystick")
+
 	status = GamepadStatus(msg)
         self.run(status)
         self.history.add(status)
+
     def computePoseFromJoy(self, pre_pose, status):
         new_pose = PoseStamped()
         new_pose.header.frame_id = self.frame_id
