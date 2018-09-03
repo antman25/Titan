@@ -34,6 +34,11 @@ class JoyStatus():
 
         self.L1 = False
         self.R1 = False
+	
+	self.left_analog_x = 10.0
+        self.left_analog_y = 10.0
+        self.right_analog_x = 10.0
+        self.right_analog_y = 10.0
 
 
 class GamepadStatus(JoyStatus):
@@ -105,6 +110,10 @@ class GamepadStatus(JoyStatus):
         else:
             self.R1 = False
        
+	self.left_analog_x = 10.0
+        self.left_analog_y = 10.0
+        self.right_analog_x = 10.0
+        self.right_analog_y = 10.0
 
         self.orig_msg = msg
 
@@ -137,7 +146,9 @@ class StatusHistory():
 
 class MoveitJoy:
     def parseSRDF(self):
+	print "test"
         ri = RobotInterface("/robot_description")
+	print "test2"
         planning_groups = {}
         for g in ri.get_group_names():
             self.planning_groups_tips[g] = ri.get_group_joint_tips(g)
@@ -400,3 +411,9 @@ class MoveitJoy:
         self.marker_lock.acquire()
         self.initial_poses[self.current_pose_topic.split("/")[-1]] = new_pose.pose
         self.marker_lock.release()
+
+
+if __name__ == "__main__":
+    rospy.init_node("moveit_joy")
+    app = MoveitJoy()
+    rospy.spin()
