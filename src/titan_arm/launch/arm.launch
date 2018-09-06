@@ -19,7 +19,7 @@
     <rosparam param="/source_list">[/joint_states]</rosparam>
   </node>
 
-  <node name="titan_arm_action_server_node" pkg="titan_arm" type="titan_arm_action_server_node"/> 
+  <node name="titan_arm_action_server_node" pkg="titan_control" type="titan_arm_action_server_node"/> 
 
 
   <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
