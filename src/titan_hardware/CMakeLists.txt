@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
 	roslaunch
 	controller_manager
 	hardware_interface
+	titan_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -106,7 +107,7 @@ find_package(Boost REQUIRED COMPONENTS system chrono)
 catkin_package(
 #	INCLUDE_DIRS include
 #  LIBRARIES titan_hardware
-	CATKIN_DEPENDS roscpp control_toolbox hardware_interface std_msgs
+	CATKIN_DEPENDS roscpp control_toolbox hardware_interface std_msgs titan_msgs
 #  DEPENDS system_lib
 )
 

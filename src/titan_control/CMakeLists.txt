@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   roslaunch
   std_msgs
+  titan_msgs
   geometry_msgs
   actionlib_msgs
   actionlib
@@ -115,7 +116,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES mybot_control
+  LIBRARIES titan_msgs
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -142,7 +143,7 @@ catkin_package(
 
 ## Declare a C++ executable
  add_executable(titan_nav_node src/titan_nav_node.cpp)
-
+# add_executable(titan_arm_action_server src/titan_arm_action_server.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above

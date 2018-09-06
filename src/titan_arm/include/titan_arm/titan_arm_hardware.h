@@ -11,7 +11,13 @@
 #include <std_msgs/Int64.h>
 #include <titan_msgs/ArmCmd.h>
 
-#define TOTAL_ARM_JOINTS	3
+#define JOINT_ZAXIS		0
+#define JOINT_LINK1		1
+#define JOINT_LINK2		2
+#define JOINT_LINK3		3
+
+
+#define TOTAL_ARM_JOINTS	4
 
 
 class titan_arm_hardware : public hardware_interface::RobotHW
@@ -23,6 +29,7 @@ class titan_arm_hardware : public hardware_interface::RobotHW
 
 		void read();
 		void write();
+		void cbArmStatus(const titan_msgs::ArmStatus::ConstPtr &msg);
 	private:
 		ros::NodeHandle nh;
 		ros::NodeHandle nh_private;
@@ -32,5 +39,6 @@ class titan_arm_hardware : public hardware_interface::RobotHW
 		double pos[TOTAL_ARM_JOINTS];
 		double vel[TOTAL_ARM_JOINTS];
 		double eff[TOTAL_ARM_JOINTS];
+		ros::Subscriber subArmStatus;
 };
 #endif
