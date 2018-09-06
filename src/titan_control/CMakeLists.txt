@@ -7,6 +7,7 @@ project(titan_control)
 #find_package(catkin REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   controller_manager
+  hardware_interface
   roscpp
   roslaunch
   std_msgs
@@ -19,7 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+ find_package(Boost REQUIRED COMPONENTS system chrono)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -116,8 +117,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-  LIBRARIES titan_msgs
-#  CATKIN_DEPENDS other_catkin_pkg
+#  LIBRARIES titan_msgs
+  CATKIN_DEPENDS roscpp control_toolbox hardware_interface std_msgs actionlib titan_msgs
 #  DEPENDS system_lib
 )
 
@@ -129,6 +130,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
  include_directories(include
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -143,16 +145,17 @@ catkin_package(
 
 ## Declare a C++ executable
  add_executable(titan_nav_node src/titan_nav_node.cpp)
-# add_executable(titan_arm_action_server src/titan_arm_action_server.cpp)
+ add_executable(titan_arm_action_server_node src/titan_arm_action_server.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(mybot_control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(titan_arm_action_server_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(mybot_control_node
-#   ${catkin_LIBRARIES}
-# )
+ target_link_libraries(titan_arm_action_server_node
+   ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
+ )
 
 target_link_libraries(titan_nav_node
    ${catkin_LIBRARIES}
