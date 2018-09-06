@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+        <include file="$(find titan_base)/launch/titan-nomap.launch" />
+
+
+
+	<!-- Move base -->
+	<include file="$(find titan_navigation)/launch/move_base.launch">
+		<remap from="cmd_vel" to="/titan_velocity_controller/cmd_vel"/>
+	</include>
+
+</launch>
+
+
+
+
