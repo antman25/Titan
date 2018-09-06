@@ -219,7 +219,7 @@
 		<child link="zaxis_base_link"/>
 		<limit effort="1000.0" lower="0.0" upper="${arm_base_z_size }" velocity="0.5"/>
 		<axis xyz="0 0 -1"/>
-		<origin xyz="0.05 0 ${arm_base_z_size/2 - zaxis_base_z_size/2 - 0.0504}"/>
+		<origin xyz="0.05 0 ${arm_base_z_size/2 - zaxis_base_z_size/2 - 0.0254}"/>
 	</joint>
 
 	<joint name="zaxis_to_link1" type="fixed">
