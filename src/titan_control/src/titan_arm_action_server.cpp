@@ -50,7 +50,7 @@ protected:
 	//ros::Publisher servo2cmd;// = n.advertise<std_msgs::Float32>("/servo2_angle_cmd", 1000);
 	//ros::Publisher servo3cmd;
 	//ros::Publisher zaxiscmd;
-	//ros::Publisher pubArmCmd;// = nh_.advertise<titan_msgs::ArmCmd>("/arm_cmd", 1000);
+	ros::Publisher pubArmCmd;// = nh_.advertise<titan_msgs::ArmCmd>("/arm_cmd", 1000);
 
 public:
 
@@ -65,7 +65,7 @@ public:
 		//zaxiscmd = nh_.advertise<std_msgs::Float32>("/z_axis_cmd", 1000);
 		//pubArmCmd = nh_.advertise<titan_msgs::ArmCmd>("/arm_cmd", 1000);
 
-		
+		pubArmCmd = nh_.advertise<titan_msgs::ArmCmd>("/arm_cmd", 1000);		
 
     		//Register callback functions:
 		as_.registerGoalCallback(boost::bind(&RobotTrajectoryFollower::goalCB, this));
@@ -109,12 +109,12 @@ public:
 			//servo2cmd.publish(ang2);
 			//servo3cmd.publish(ang3);
 			//zaxiscmd.publish(zaxis);
-			/*titan_msgs::ArmCmd arm_cmd;
+			titan_msgs::ArmCmd arm_cmd;
 			arm_cmd.z_axis_pos = zaxis;
 			arm_cmd.servo1_pos = ang1;
 			arm_cmd.servo2_pos = ang2;
 			arm_cmd.servo3_pos = ang3;
-			pubArmCmd.publish(arm_cmd);*/
+			pubArmCmd.publish(arm_cmd);
 			
 			for (int j=0;j<positions.size();j++)
 			{
@@ -184,7 +184,6 @@ int main(int argc, char** argv)
 	controller_manager::ControllerManager cm(&titan_arm, controller_nh);
 	boost::thread(boost::bind(controlThread, ros::Rate(50), &titan_arm, &cm));
 	
-
 
   	ROS_INFO("Starting Titan Hardware / Action Server node");
 	ROS_INFO("Starting to spin...");
