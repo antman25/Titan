@@ -9,6 +9,7 @@
 
 #include <std_msgs/Float64.h>
 #include <std_msgs/Int64.h>
+#include <titan_msgs/ArmStatus.h>
 #include <titan_msgs/ArmCmd.h>
 
 #define JOINT_ZAXIS		0
@@ -40,5 +41,6 @@ class titan_arm_hardware : public hardware_interface::RobotHW
 		double vel[TOTAL_ARM_JOINTS];
 		double eff[TOTAL_ARM_JOINTS];
 		ros::Subscriber subArmStatus;
+		ros::Publisher  pubArmCmd;
 };
 #endif

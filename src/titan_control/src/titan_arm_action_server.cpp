@@ -8,6 +8,12 @@
 #include <control_msgs/FollowJointTrajectoryFeedback.h>
 #include <control_msgs/FollowJointTrajectoryResult.h>
 
+#include <hardware_interface/joint_state_interface.h>
+#include <hardware_interface/joint_command_interface.h>
+#include <hardware_interface/robot_hw.h>
+
+#include <titan_arm/titan_arm_hardware.h>
+
 #include <std_msgs/Float32.h>
 
 #include <trajectory_msgs/JointTrajectory.h>
@@ -18,6 +24,11 @@
 #include <boost/chrono.hpp>
 #include <boost/thread.hpp>
 
+#define JOINT_ZAXIS		0
+#define JOINT_LINK1		1
+#define JOINT_LINK2		2
+#define JOINT_LINK3		3
+#define JOINT_TOTAL		4
 
 typedef boost::chrono::steady_clock time_source;
 
@@ -34,6 +45,7 @@ protected:
 	std::string action_name_;
 	control_msgs::FollowJointTrajectoryFeedback feedback_;
 	control_msgs::FollowJointTrajectoryResult result_;
+
 	//ros::Publisher servo1cmd;// = n.advertise<std_msgs::Float32>("/servo1_angle_cmd", 1000);
 	//ros::Publisher servo2cmd;// = n.advertise<std_msgs::Float32>("/servo2_angle_cmd", 1000);
 	//ros::Publisher servo3cmd;
@@ -41,6 +53,8 @@ protected:
 	//ros::Publisher pubArmCmd;// = nh_.advertise<titan_msgs::ArmCmd>("/arm_cmd", 1000);
 
 public:
+
+	
 
 	RobotTrajectoryFollower(std::string name) : as_(nh_, name, false), action_name_(name)
 	{
@@ -51,12 +65,15 @@ public:
 		//zaxiscmd = nh_.advertise<std_msgs::Float32>("/z_axis_cmd", 1000);
 		//pubArmCmd = nh_.advertise<titan_msgs::ArmCmd>("/arm_cmd", 1000);
 
+		
+
     		//Register callback functions:
 		as_.registerGoalCallback(boost::bind(&RobotTrajectoryFollower::goalCB, this));
 		as_.registerPreemptCallback(boost::bind(&RobotTrajectoryFollower::preemptCB, this));
 		
 		as_.start();
 	}
+
 
 	~RobotTrajectoryFollower(void)//Destructor
 	{
@@ -130,7 +147,7 @@ public:
 	}
 };
 
-/*void controlThread(ros::Rate rate, titan_arm_hardware* robot, controller_manager::ControllerManager* cm)
+void controlThread(ros::Rate rate, titan_arm_hardware* robot, controller_manager::ControllerManager* cm)
 {
 	time_source::time_point last_time = time_source::now();
 
@@ -146,7 +163,7 @@ public:
 		robot->write();
 		rate.sleep();
 	}
-}*/
+}
 
 
 
@@ -161,11 +178,11 @@ int main(int argc, char** argv)
 		
 	ros::NodeHandle nh;
 	ros::NodeHandle nh_private("~");
-	//titan_arm_hardware titan_arm(nh,nh_private);
+	titan_arm_hardware titan_arm(nh,nh_private);
 
 	ros::NodeHandle controller_nh("");
-	//controller_manager::ControllerManager cm(&titan_arm, controller_nh);
-	//boost::thread(boost::bind(controlThread, ros::Rate(50), &titan_arm, &cm));
+	controller_manager::ControllerManager cm(&titan_arm, controller_nh);
+	boost::thread(boost::bind(controlThread, ros::Rate(50), &titan_arm, &cm));
 	
 
 
