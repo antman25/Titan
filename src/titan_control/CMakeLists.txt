@@ -144,7 +144,8 @@ catkin_package(
 # add_dependencies(mybot_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
- add_executable(titan_nav_node src/titan_nav_node.cpp)
+ add_executable(titan_raw_to_prod_node src/titan_raw_to_prod_node.cpp)
+ add_executable(titan_prod_to_raw_node src/titan_prod_to_raw_node.cpp)
  add_executable(titan_arm_action_server_node 	src/titan_arm_hardware.cpp
 						src/titan_arm_action_server.cpp)
 
@@ -158,7 +159,12 @@ catkin_package(
    ${Boost_LIBRARIES}
  )
 
-target_link_libraries(titan_nav_node
+target_link_libraries(titan_raw_to_prod_node
+   ${catkin_LIBRARIES}
+ )
+
+
+target_link_libraries(titan_prod_to_raw_node
    ${catkin_LIBRARIES}
  )
 
