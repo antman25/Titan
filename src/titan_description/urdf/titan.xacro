@@ -41,7 +41,7 @@
 	<xacro:property name="zaxis_base_z_size" value="0.1524"/>
 	<xacro:property name="zaxis_base_mass" value="0.05"/>
 
-	<xacro:property name="link1_base_x_size" value="0.09"/>
+	<xacro:property name="link1_base_x_size" value="0.115"/>
 	<xacro:property name="link1_base_y_size" value="0.0381"/>
 	<xacro:property name="link1_base_z_size" value="0.0381"/>
 	<xacro:property name="link1_base_mass" value="0.05"/>
@@ -181,7 +181,7 @@
 	<joint name="base_to_camera" type="fixed">
                 <parent link="base_link"/>   
                 <child link="camera_link"/> 
-                <origin xyz="0.0 0.15 0.6" rpy="0.0 0.63 0.0" />
+                <origin xyz="0.025 0.15 0.6" rpy="0.0 0.63 0.0" />
         </joint>
 
 
@@ -219,7 +219,7 @@
 		<child link="zaxis_base_link"/>
 		<limit effort="1000.0" lower="0.0" upper="${arm_base_z_size }" velocity="0.5"/>
 		<axis xyz="0 0 -1"/>
-		<origin xyz="0.05 0 ${arm_base_z_size/2 - zaxis_base_z_size/2 - 0.075}"/>
+		<origin xyz="0.09 0 ${arm_base_z_size/2 - zaxis_base_z_size/2 - 0.075}"/>
 	</joint>
 
 	<joint name="zaxis_to_link1" type="fixed">

@@ -120,6 +120,11 @@ void titan_hardware::read()
 
 void titan_hardware::write()
 {
+	titan_msgs::MotorVelocity msgMotorVelocity;
+	msgMotorVelocity.left_angular_vel = cmd[LEFT_MASTER];
+	msgMotorVelocity.right_angular_vel = cmd[RIGHT_MASTER];
+
+	pubMotorVelocity.publish(msgMotorVelocity);
 }
 
 void titan_hardware::updateMotorData(int motor, long encoderVal, int32_t encoderVel)
@@ -173,9 +178,9 @@ void titan_hardware::cbArmStatus(const titan_msgs::ArmStatus::ConstPtr &msg)
         //updateMotorData(MOTOR_FRONT_LEFT, msg->data); 
         //ROS_INFO("Status Update");
         pos[JOINT_ZAXIS] = msg->z_axis_pos;
-        pos[JOINT_LINK1] = msg->servo1_pos * (3.1415926 / 180.0);
-        pos[JOINT_LINK2] = msg->servo2_pos * (3.1415926 / 180.0);
-        pos[JOINT_LINK3] = msg->servo3_pos * (3.1415926 / 180.0);
+        pos[JOINT_LINK1] = msg->servo1_pos * (-3.1415926 / 180.0);
+        pos[JOINT_LINK2] = msg->servo2_pos * (-3.1415926 / 180.0);
+        pos[JOINT_LINK3] = msg->servo3_pos * (-3.1415926 / 180.0);
 
         /*ROS_INFO("Status: Base to Zaxis -- Pos: %f", pos[0]);
         ROS_INFO("Status: Link1 to Link2 -- Pos: %f", pos[1]);

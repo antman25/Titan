@@ -20,7 +20,7 @@ void controlThread(ros::Rate rate, titan_hardware* robot, controller_manager::Co
 		last_time = this_time;
 		//robot->read();
 		cm->update(ros::Time::now(), elapsed);
-		//robot->write();
+		robot->write();
 		rate.sleep();
 	}
 }
