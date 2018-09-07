@@ -56,6 +56,7 @@
     <disable_collisions link1="arm_base_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="arm_base_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="arm_base_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="arm_base_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="arm_base_link" link2="zaxis_base_link" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="camera_link" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="computer_link" reason="Adjacent" />
@@ -67,6 +68,7 @@
     <disable_collisions link1="base_link" link2="right_front_wheel_link" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="right_mid_wheel_link" reason="Adjacent" />
     <disable_collisions link1="base_link" link2="right_rear_wheel_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="tray_link" reason="Adjacent" />
     <disable_collisions link1="camera_link" link2="computer_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="end_effector" reason="Never" />
     <disable_collisions link1="camera_link" link2="imu_link" reason="Never" />
@@ -80,6 +82,7 @@
     <disable_collisions link1="camera_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="computer_link" link2="imu_link" reason="Never" />
     <disable_collisions link1="computer_link" link2="laser" reason="Default" />
@@ -89,6 +92,7 @@
     <disable_collisions link1="computer_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="computer_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="computer_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="computer_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="end_effector" link2="link1" reason="Never" />
     <disable_collisions link1="end_effector" link2="link2" reason="Never" />
     <disable_collisions link1="end_effector" link2="link3" reason="Adjacent" />
@@ -101,6 +105,7 @@
     <disable_collisions link1="imu_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="imu_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="imu_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="imu_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="imu_link" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="laser" link2="left_front_wheel_link" reason="Never" />
     <disable_collisions link1="laser" link2="left_mid_wheel_link" reason="Never" />
@@ -109,6 +114,7 @@
     <disable_collisions link1="laser" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="laser" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="laser" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="laser" link2="tray_link" reason="Never" />
     <disable_collisions link1="laser" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="left_mid_wheel_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="left_rear_wheel_link" reason="Never" />
@@ -117,6 +123,7 @@
     <disable_collisions link1="left_front_wheel_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="left_front_wheel_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="left_front_wheel_link" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="left_rear_wheel_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="link1" reason="Never" />
@@ -124,25 +131,32 @@
     <disable_collisions link1="left_mid_wheel_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="left_mid_wheel_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="left_mid_wheel_link" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="left_rear_wheel_link" link2="link1" reason="Never" />
     <disable_collisions link1="left_rear_wheel_link" link2="link2" reason="Never" />
     <disable_collisions link1="left_rear_wheel_link" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="left_rear_wheel_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="left_rear_wheel_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="left_rear_wheel_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="left_rear_wheel_link" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="link1" link2="link2" reason="Adjacent" />
     <disable_collisions link1="link1" link2="link3" reason="Never" />
     <disable_collisions link1="link1" link2="right_front_wheel_link" reason="Never" />
     <disable_collisions link1="link1" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="link1" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="link1" link2="tray_link" reason="Never" />
     <disable_collisions link1="link1" link2="zaxis_base_link" reason="Adjacent" />
     <disable_collisions link1="link2" link2="link3" reason="Adjacent" />
     <disable_collisions link1="link2" link2="right_rear_wheel_link" reason="Never" />
     <disable_collisions link1="right_front_wheel_link" link2="right_mid_wheel_link" reason="Never" />
     <disable_collisions link1="right_front_wheel_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="right_front_wheel_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="right_front_wheel_link" link2="zaxis_base_link" reason="Never" />
     <disable_collisions link1="right_mid_wheel_link" link2="right_rear_wheel_link" reason="Never" />
+    <disable_collisions link1="right_mid_wheel_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="right_mid_wheel_link" link2="zaxis_base_link" reason="Never" />
+    <disable_collisions link1="right_rear_wheel_link" link2="tray_link" reason="Never" />
     <disable_collisions link1="right_rear_wheel_link" link2="zaxis_base_link" reason="Never" />
+    <disable_collisions link1="tray_link" link2="zaxis_base_link" reason="Never" />
 </robot>
