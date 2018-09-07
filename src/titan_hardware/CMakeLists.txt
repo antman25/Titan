@@ -137,8 +137,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(titan_hardware_node src/titan_hardware_node.cpp
-			 src/titan_arm_hardware.cpp
-			 src/titan_base_hardware.cpp
+			 	   src/titan_hardware.cpp
 	      )
 
 ## Rename C++ executable without prefix

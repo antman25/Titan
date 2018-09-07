@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <node name="titan_base_node" pkg="titan_base" type="titan_base_node" respawn="false" output="screen"/>
+  <node name="titan_hardware_node" pkg="titan_hardware" type="titan_hardware_node" respawn="false" output="screen"/>
 
   
 </launch>
