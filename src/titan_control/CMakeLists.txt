@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   actionlib_msgs
   actionlib
+  serial
 )
 
 
@@ -144,10 +145,11 @@ catkin_package(
 # add_dependencies(mybot_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
+ add_executable(titan_xbee_node src/xbee_serial.cpp)
  add_executable(titan_raw_to_prod_node src/titan_raw_to_prod_node.cpp)
  add_executable(titan_prod_to_raw_node src/titan_prod_to_raw_node.cpp)
  add_executable(titan_arm_action_server_node 	src/titan_arm_hardware.cpp
-						src/titan_arm_action_server.cpp)
+ 						src/titan_arm_action_server.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -167,6 +169,11 @@ target_link_libraries(titan_raw_to_prod_node
 target_link_libraries(titan_prod_to_raw_node
    ${catkin_LIBRARIES}
  )
+
+target_link_libraries(titan_xbee_node
+   ${catkin_LIBRARIES}
+ )
+
 
 #############
 ## Install ##
