@@ -41,7 +41,6 @@
         <joint name="link2_to_link3" value="-2.29" />
         <joint name="link3_to_eef" value="1.222" />
     </group_state>
-
     <group_state name="Load2_Up" group="ArmGroup">
         <joint name="base_to_zaxis" value="0" />
         <joint name="link1_to_link2" value="-2.31" />
@@ -54,7 +53,6 @@
         <joint name="link2_to_link3" value="-1.675" />
         <joint name="link3_to_eef" value="0.8358" />
     </group_state>
-
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_arm_link" type="planar" parent_frame="odom" child_link="base_link" />
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
