@@ -48,7 +48,9 @@
   <build_depend>roslint</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>
+  <build_depend>titan_msgs</build_depend>
 
+  <run_depend>titan_msgs</run_depend>
   <run_depend>controller_manager</run_depend>
   <run_depend>diff_drive_controller</run_depend>
   <run_depend>geometry_msgs</run_depend>
