@@ -299,6 +299,27 @@
 		</plugin>
 	</gazebo>
 
+
+	<gazebo>
+		<plugin name="diff_drive_6w" filename="libdiffdrive_plugin_6w.so">
+			<robotNamespace>$(arg robot_namespace)</robotNamespace>
+			<topicName>/titan_velocity_controller/cmd_vel</topicName>
+
+			<frontLeftJoint>left_front_wheel</frontLeftJoint>
+			<midLeftJoint>left_mid_wheel</midLeftJoint>
+			<rearLeftJoint>left_rear_wheel</rearLeftJoint>
+
+			<frontRightJoint>right_front_wheel</frontRightJoint>
+			<midRightJoint>right_mid_wheel</midRightJoint>
+			<rearRightJoint>right_rear_wheel</rearRightJoint>
+
+			<wheelSeparation>0.58</wheelSeparation>
+			<wheelDiameter>0.18</wheelDiameter>
+			<torque>10000</torque>
+		</plugin>
+		
+	</gazebo>
+
 	<!--<gazebo>
 		<plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
 			<updateRate>100.0</updateRate>
@@ -318,14 +339,14 @@
 		</plugin>
 	</gazebo> -->
 
-	<gazebo>
+	<!-- <gazebo>
 		<plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
 		<robotNamespace>$(arg robot_namespace)</robotNamespace>
 
 		<alwaysOn>true</alwaysOn>
 		<updateRate>100</updateRate>
-		<leftJoint>left_mid_wheel</leftJoint>
-		<rightJoint>right_mid_wheel</rightJoint>
+		<leftJoint>left_front_wheel</leftJoint>
+		<rightJoint>right_front_wheel</rightJoint>
 		<wheelSeparation>0.68</wheelSeparation>
 		<wheelDiameter>0.18</wheelDiameter>
 		<torque>20</torque>
@@ -344,7 +365,7 @@
 		<publishTf>1</publishTf>
 		<odometrySource>encoder</odometrySource>
 		</plugin>
-	</gazebo>
+	</gazebo> -->
 
 
 	<gazebo>

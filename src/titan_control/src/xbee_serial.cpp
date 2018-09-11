@@ -69,10 +69,6 @@ int main (int argc, char** argv){
             ROS_INFO_STREAM("Read: " << result.data);
             read_pub.publish(result);
           	
-				    if (strlen(result.data) >= 2)
-						{
-							ROS_INFO_STREAM("PIZZA");
-						}
 	
         }
         loop_rate.sleep();

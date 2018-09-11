@@ -3,9 +3,9 @@ frequency: 20
 sensor_timeout: 0.5
 transform_time_offset: 0.0
 two_d_mode: true
-print_diagnostics: true
+print_diagnostics: false
 
-debug: true
+debug: false
 debug_out_file: /tmp/debug.txt
 
 odom_frame: odom

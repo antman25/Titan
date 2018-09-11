@@ -24,8 +24,8 @@
 		</link>
 
 		<gazebo reference="${wheel_prefix}_wheel_link">
-			<mu1 value="1.0" />
-			<mu2 value="1.0" />
+			<mu1 value="100" />
+			<mu2 value="200" />
 			<kp value="10000000.0" />
 			<kd value="1.0" />
 			<maxVel value="1.0" />
